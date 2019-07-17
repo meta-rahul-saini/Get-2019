@@ -2,8 +2,6 @@ package Marksheet;
 import java.util.ArrayList;
 
 public class Marksheet {
-
-
 	
 	/**
 	 * @param studentGrades is the grades of all students
@@ -14,16 +12,13 @@ public class Marksheet {
 		float sumOfStudentGrades = 0;
 		
 		// computing sum of all student's grade
-		
 		for (int studentGrade: studentGrades)
 		{
 			sumOfStudentGrades +=studentGrade;  
 		}
-		
+	
 		// find average of students grade
-		
 		float averageGrade = sumOfStudentGrades/ (float)(studentGrades.size());
-		
 		return averageGrade;
 		
 	}
@@ -38,7 +33,6 @@ public class Marksheet {
 		float maxGrade = 0;
 		
 		// computing sum of all student's grade
-		
 		for (int studentGrade: studentGrades)
 		{
 			if(maxGrade < studentGrade)
@@ -46,9 +40,6 @@ public class Marksheet {
 				maxGrade = studentGrade;
 			}
 		}
-		
-		// find average of students grade
-		
 		return maxGrade;
 		
 	}
@@ -63,7 +54,6 @@ public class Marksheet {
 		float minGrade = 101;
 		
 		// computing sum of all student's grade
-		
 		for (int studentGrade: studentGrades)
 		{
 			if(minGrade > studentGrade)
@@ -73,7 +63,6 @@ public class Marksheet {
 		}
 		
 		// find average of students grade
-		
 		return minGrade;
 		
 	}
@@ -85,17 +74,21 @@ public class Marksheet {
 	 */
 	public float percentageOfStudentPassed(ArrayList<Integer> studentGrades){
 		int noOfStudentPassed = 0;
+		
+		// computing no. of student passed
 		for (int studentGrade: studentGrades)
 		{
 			if(studentGrade>=40)
 				noOfStudentPassed+=1;
 		}
 		
+		
 		int totalNoOfStudents = studentGrades.size();
-		return ((float)noOfStudentPassed)/ (float) totalNoOfStudents*100;
-	}
+		
+		// percentage of student passed
+		float percentageStudentsPassed = ((float)noOfStudentPassed)/ ((float) totalNoOfStudents)*100;
 
-	
-	
+		return percentageStudentsPassed;
+	}
 	
 }

@@ -1,44 +1,35 @@
 package StringOperations;
 
-
 public class StringOperations {
 
-	
 	/**
 	 * compare strings
 	 * 
 	 * @param str1
 	 * @param str2
-	 * @return 
+	 * @return
 	 */
 	public int isEqual(String str1, String str2) {
 		// check for the equal length
-		
 		if (str1.length() != str2.length()) {
 			return 0;
-		}
-
-		else {
-
+		} else {
 			// if length is equal then check weather they are same by iterating
-
 			for (int index = 0; index < str1.length(); index++) {
 				if (str1.charAt(index) != str2.charAt(index)) {
 					return 0;
 				}
 			}
-			
 			// if strings are equal then return 1
 			return 1;
 		}
-
 	}
 
-	
 	/**
 	 * reverse the passed string
-	 * @param str 
-	 * @return 
+	 * 
+	 * @param str
+	 * @return
 	 */
 	public String reverse(String str) {
 		String revString = "";
@@ -46,12 +37,12 @@ public class StringOperations {
 			revString = revString + str.charAt(index);
 
 		}
-
 		return revString;
 	}
 
 	/**
 	 * swap the case of string
+	 * 
 	 * @param str
 	 * @return
 	 */
