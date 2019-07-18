@@ -2,11 +2,11 @@
 
 public class Item {
 
-	int itemID = 0;
-	String itemName = "";
-	int itemPrice = 0;
-	int itemAvailableQuantity = 0;
-	String itemDetail = "";
+	private int itemID = 0;
+	private String itemName = "";
+	private int itemPrice = 0;
+	private int itemQuantity = 0;
+	private String itemDetail = "";
 
 	// we use getters and setters to update and access item information
 
@@ -37,15 +37,15 @@ public class Item {
 		this.itemPrice = itemPrice;
 	}
 
-	public int getItemAvailableQuantity() {
-		return itemAvailableQuantity;
+	public int getItemQuantity() {
+		return itemQuantity;
 	}
 
-	public void setItemAvailableQuantity(int itemAvailablityCount) {
+	public void setItemQuantity(int itemAvailablityCount) {
 		if (itemPrice < 0) {
 			throw new ArithmeticException("itemAvailablityCount must be positive");
 		}
-		this.itemAvailableQuantity = itemAvailablityCount;
+		this.itemQuantity = itemAvailablityCount;
 	}
 
 	public String getItemDetail() {

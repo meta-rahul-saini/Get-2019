@@ -11,25 +11,34 @@ public class Cart {
 	// we use this function to add items to our cartList from availableItemList
 
 	public void addItemToCart(HashMap<Integer, Item> availableItemList,
-			int itemID, int itemAvailableQuantity) {
+			int itemID, int QuantityOfItemToAddToCart) {
 
 		Item choosedItem = availableItemList.get(itemID);
 
-		if (choosedItem.getItemAvailableQuantity() < itemAvailableQuantity) {
+		if (choosedItem.getItemQuantity() < QuantityOfItemToAddToCart) {
 			System.out
 					.println("Sorry, Requested no. of Items are not available");
-		} else {
+		} 
+		// if we already have that item in our list then simply increase the quantity
+		else if(cartItemList.containsKey(itemID))
+		{
+			choosedItem.setItemQuantity(QuantityOfItemToAddToCart + choosedItem.getItemQuantity());
+			
+			choosedItem.setItemQuantity(choosedItem
+					.getItemQuantity() - QuantityOfItemToAddToCart);
+		}
+		else {
 			Item item = new Item();
 			item.setItemID(choosedItem.getItemID());
 			item.setItemName(choosedItem.getItemName());
 			item.setItemPrice(choosedItem.getItemPrice());
-			item.setItemAvailableQuantity(itemAvailableQuantity);
+			item.setItemQuantity(QuantityOfItemToAddToCart);
 			item.setItemDetail(choosedItem.getItemDetail());
 
 			// updating the count of items in itemList
 
-			choosedItem.setItemAvailableQuantity(choosedItem
-					.getItemAvailableQuantity() - itemAvailableQuantity);
+			choosedItem.setItemQuantity(choosedItem
+					.getItemQuantity() - QuantityOfItemToAddToCart);
 
 			// adding the items in cart
 			cartItemList.put(itemID, item);
@@ -62,28 +71,28 @@ public class Cart {
 				// updating the availableQuantity of item in availableItemList
 
 				availableItemListItem
-						.setItemAvailableQuantity(availableItemListItem
-								.getItemAvailableQuantity()
-								+ item.getItemAvailableQuantity());
+						.setItemQuantity(availableItemListItem
+								.getItemQuantity()
+								+ item.getItemQuantity());
 			} else {
 
 				if (itemAvailableQuantity < availableItemListItem
-						.getItemAvailableQuantity()
-						+ item.getItemAvailableQuantity()) {
+						.getItemQuantity() 
+						+ item.getItemQuantity()) {
 
 					// updating the available itemAvailableQuantity in the item
 					// in itemList
 
 					availableItemListItem
-							.setItemAvailableQuantity(availableItemListItem
-									.getItemAvailableQuantity()
-									+ item.getItemAvailableQuantity()
+							.setItemQuantity(availableItemListItem
+									.getItemQuantity()
+									+ item.getItemQuantity()
 									- itemAvailableQuantity);
 
 					// updating the requested itemAvailableQuantity in the item
 					// in CartList
 
-					item.setItemAvailableQuantity(itemAvailableQuantity);
+					item.setItemQuantity(itemAvailableQuantity);
 
 				}
 
@@ -124,7 +133,7 @@ public class Cart {
 				System.out.println("item Name:" + item.getItemName());
 				System.out.println("item Price:" + item.getItemPrice());
 				System.out.println("item Count:"
-						+ item.getItemAvailableQuantity());
+						+ item.getItemQuantity());
 				System.out.println("item Detail:" + item.getItemDetail());
 				System.out.println("---------------------------------");
 			}
@@ -151,10 +160,10 @@ public class Cart {
 
 				Item item = cartItemList.get(itemID);
 				totalAmount += item.getItemPrice()
-						* item.getItemAvailableQuantity();
+						* item.getItemQuantity();
 				System.out.println("item ID: " + item.getItemID()
 						+ "\t item Name: " + item.getItemName()
-						+ "\t item Price" + item.getItemPrice() + "\t #item added to Cart" + item.getItemAvailableQuantity());
+						+ "\t item Price" + item.getItemPrice() + "\t #item added to Cart" + item.getItemQuantity());
 
 			}
 			System.out.println("\ntotalAmount:" + totalAmount + "\n\n");
