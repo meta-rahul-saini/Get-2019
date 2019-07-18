@@ -6,9 +6,9 @@ public class Rectangle  implements Shape {
 	private double height =0;
 	
 	
-	/**
-	 * @param width in double
-	 * @param height in double
+	/**constructor which initialize rectangle width and height value
+	 * @param width in double, width of rectangle
+	 * @param height in double, height of rectangle
 	 */
 	public Rectangle(double width, double height)
 	{
@@ -18,7 +18,7 @@ public class Rectangle  implements Shape {
 	
 	
 	/* 
-	 * Find area of Triangle
+	 * Find area of Rectangle
 	 * @return area in double
 	 */
 	@Override

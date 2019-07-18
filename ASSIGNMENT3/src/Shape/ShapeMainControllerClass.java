@@ -5,61 +5,50 @@ import java.util.Scanner;
 
 public class ShapeMainControllerClass {
 
-	// this is the utility method we use to display options to user
-
-	public static void displayOptions() {
-		System.out.println("1. Area of Triangle");
-		System.out.println("2. Area of Rectangle");
-		System.out.println("3. Area of Circle");
-		System.out.println("4. Area of Square");
-		System.out.println("5. Exit");
-
-	}
-
-	// function to get choice from user
-
-	public static int getChoice() {
-		int choice = 0;
-		boolean error = true;
-		Scanner sc;
-		do {
-			try {
-				System.out.println("Enter your choice:\n");
-				sc = new Scanner(System.in);
-				choice = sc.nextInt();
-				if (choice < 1 | choice > 5) {
-					System.out.println("Please Enter a valid positive integer");
-					error = true;
-				} else {
-					error = false;
-					if (choice == 5) {
-						System.out.println("Exiting System");
-						System.exit(0);
-					}
-				}
-			} catch (InputMismatchException e) {
-				System.out
-						.println("Input Mismatch Exception occured. Please Enter a valid Positive Integer");
-			}
-		} while (error == true);
-		return choice;
-	}
-
 	public static void main(String[] args) {
 
 		boolean flag1 = true;
 		boolean flag2 = true;
 		int choice = 0;
-		Scanner sc;
+		Scanner sc = new Scanner(System.in);
 		double width = 0;
 		double height = 0;
 		double area = 0;
 		double radius = 0;
+		boolean error = true;
 
 		while (flag1) {
-			displayOptions();
 
-			choice = getChoice();
+			// show options
+			System.out.println("1. Area of Triangle");
+			System.out.println("2. Area of Rectangle");
+			System.out.println("3. Area of Circle");
+			System.out.println("4. Area of Square");
+			System.out.println("5. Exit");
+
+			// get choice
+			error = true;
+			do {
+				try {
+					System.out.println("Enter your choice:\n");
+					sc = new Scanner(System.in);
+					choice = sc.nextInt();
+					if (choice < 1 | choice > 5) {
+						System.out
+								.println("Please Enter a valid positive integer");
+						error = true;
+					} else {
+						error = false;
+						if (choice == 5) {
+							System.out.println("Exiting System");
+							System.exit(0);
+						}
+					}
+				} catch (InputMismatchException e) {
+					System.out
+							.println("Input Mismatch Exception occured. Please Enter a valid Positive Integer");
+				}
+			} while (error == true);
 
 			switch (choice) {
 			// area of triangle
@@ -69,9 +58,9 @@ public class ShapeMainControllerClass {
 					sc = new Scanner(System.in);
 					try {
 						System.out.println("Enter width of Triangle");
-						width = sc.nextInt();
+						width = sc.nextDouble();
 						System.out.println("Enter height of Triangle");
-						height = sc.nextInt();
+						height = sc.nextDouble();
 						flag2 = false;
 					} catch (Exception e) {
 						System.out.println(e);
@@ -92,9 +81,9 @@ public class ShapeMainControllerClass {
 					sc = new Scanner(System.in);
 					try {
 						System.out.println("Enter width of Rectangle");
-						width = sc.nextInt();
+						width = sc.nextDouble();
 						System.out.println("Enter height of Rectangle");
-						height = sc.nextInt();
+						height = sc.nextDouble();
 						flag2 = false;
 					} catch (Exception e) {
 						System.out.println(e);
@@ -113,7 +102,7 @@ public class ShapeMainControllerClass {
 					sc = new Scanner(System.in);
 					try {
 						System.out.println("Enter radius of Circle");
-						radius = sc.nextInt();
+						radius = sc.nextDouble();
 						flag2 = false;
 					} catch (Exception e) {
 						System.out.println(e);
@@ -132,7 +121,7 @@ public class ShapeMainControllerClass {
 					sc = new Scanner(System.in);
 					try {
 						System.out.println("Enter width of Square");
-						radius = sc.nextInt();
+						radius = sc.nextDouble();
 						flag2 = false;
 					} catch (Exception e) {
 						System.out.println(e);
@@ -151,6 +140,7 @@ public class ShapeMainControllerClass {
 			}
 
 		}
+		sc.close();
 	}
 
 }

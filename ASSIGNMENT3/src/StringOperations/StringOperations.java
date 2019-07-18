@@ -3,22 +3,22 @@ package StringOperations;
 public class StringOperations {
 
 	/**
-	 * compare strings
-	 * 
-	 * @param str1
-	 * @param str2
-	 * @return
+	 * compare strings to check weather they are equal or not
+	 * @param string1 string to compare
+	 * @param string2 string to compare with
+	 * @return returns 1 if strings are equal o/w return 0
 	 */
-	public int isEqual(String str1, String str2) {
+	public int isEqual(String string1, String string2) {
+		
 		// check for the equal length
-		if (str1.length() != str2.length()) {
+		if (string1.length() != string2.length()) {
 			return 0;
 		} else {
 			// if length is equal then check weather they are same by iterating
-			for (int index = 0; index < str1.length(); index++) {
-				if (str1.charAt(index) != str2.charAt(index)) {
+			for (int index = 0; index < string1.length(); index++) {
+				if (string1.charAt(index) != string2.charAt(index)) {
 					return 0;
-				}
+				}         
 			}
 			// if strings are equal then return 1
 			return 1;
@@ -27,31 +27,29 @@ public class StringOperations {
 
 	/**
 	 * reverse the passed string
-	 * 
-	 * @param str
-	 * @return
+	 * @param string input string
+	 * @return string reversed string
 	 */
-	public String reverse(String str) {
+	public String reverse(String string) {
 		String revString = "";
-		for (int index = str.length() - 1; index >= 0; index--) {
-			revString = revString + str.charAt(index);
+		for (int index = string.length() - 1; index >= 0; index--) {
+			revString = revString + string.charAt(index);
 
 		}
 		return revString;
 	}
 
 	/**
-	 * swap the case of string
-	 * 
-	 * @param str
-	 * @return
+	 * swap the case of string i.e. Capital letter would be returned as small vice-versa
+	 * @param string input string
+	 * @return string swap cased String
 	 */
-	public String swapCase(String str) {
+	public String swapCase(String string) {
 		int asciiValueOfChar = 0;
 		int convertedCaseAsciiValue = 0;
 		String caseConvertedString = "";
-		for (int index = 0; index < str.length(); index++) {
-			asciiValueOfChar = str.charAt(index);
+		for (int index = 0; index < string.length(); index++) {
+			asciiValueOfChar = string.charAt(index);
 
 			if (asciiValueOfChar >= 65 & asciiValueOfChar <= 90) {
 				convertedCaseAsciiValue = asciiValueOfChar - 65 + 97;
@@ -69,4 +67,26 @@ public class StringOperations {
 		return caseConvertedString;
 	}
 
+	
+	/**
+	 * find the largest word of string
+	 * @param string
+	 * @return String, returns largest word in the string, requires that if two maxWords are of same length then return last one
+	 */
+	public String findLargestWord(String string)
+	{
+		String words[] = string.split(" ");
+		String maxWord = "";
+		for(String currentWord: words)
+		{
+			if(maxWord.length() <= currentWord.length())
+			{
+				maxWord = currentWord;
+			}
+			
+		}
+		return maxWord;
+	}
+	
+	
 }

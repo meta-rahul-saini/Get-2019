@@ -7,7 +7,7 @@ public class Triangle implements Shape {
 	private double height =0;
 	
 	
-	/**
+	/** constructor to initialize parameters of Triangle
 	 * @param width in double
 	 * @param height in double
 	 */

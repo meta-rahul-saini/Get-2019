@@ -5,7 +5,7 @@ public class Square implements Shape {
 
 	private double width =0;
 	
-	/**
+	/**constructor to initialize Square parameters
 	 * @param width in double
 	 * @param height in double
 	 */
@@ -16,7 +16,7 @@ public class Square implements Shape {
 	
 	
 	/* 
-	 * Find area of Triangle
+	 * Find area of Square
 	 * @return area in double
 	 */
 	@Override
