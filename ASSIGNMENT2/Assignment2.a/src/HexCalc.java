@@ -7,25 +7,26 @@ public class HexCalc implements BaseConversion {
 	
 	// we use this function to convert hex to decimal
 	
+	
 	public static String hexToDecimal(String hex) {
 
 		// we first change all user entered hex digits to uppercase so that there should not generate any inconsistency due to lower case characters.
 		
 		hex = hex.toUpperCase();
 		int decimal = 0;
-		String hexdigits = "0123456789ABCDEF";
+		final String HEX_DIGITS = "0123456789ABCDEF";
 		int len = hex.length();
 		
 		// iterate over hex string and convert to decimal 
 		
-		for (int i = 0; i < len; i++) {
+		for (int index = 0; index < len; index++) {
 
-			char currentChar = hex.charAt(i);
+			char currentChar = hex.charAt(index);
 			
 			// getting the decimal digits for each user_entered hex digits
 			
-			int decimalOfCurrentChar = hexdigits.indexOf(currentChar);
-			decimal += decimalOfCurrentChar * Math.pow(16, len - i - 1);
+			int decimalOfCurrentChar = HEX_DIGITS.indexOf(currentChar);
+			decimal += decimalOfCurrentChar * Math.pow(16, len - index - 1);
 		}
 		
 		// converting decimal integer back to string
@@ -33,13 +34,18 @@ public class HexCalc implements BaseConversion {
 		return decimalInString;
 	}
 
+	
+	/**converts decimal string to hexadecimal string representation
+	 * @param dec, decimal string
+	 * @return string, hexadecimal string
+	 */
 	public static String decimalToHex(String dec) {
  
 		// integer representation of string data
 		
 		int decimal = Integer.valueOf(dec);
 
-		String hexdigits = "0123456789ABCDEF";
+		final String HEX_DIGITS = "0123456789ABCDEF";
 
 		int reminder = 0;
 		String hex = "";
@@ -48,56 +54,79 @@ public class HexCalc implements BaseConversion {
 		
 		while (decimal > 0) {
 			reminder = decimal % 16;
-			hex = hexdigits.charAt(reminder) + hex;
+			hex = HEX_DIGITS.charAt(reminder) + hex;
 			decimal = decimal / 16;
 		}
 
 		return hex;
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see BaseConversion#add(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public String add(String hex1, String hex2) {
+		
+
+		hex1 = hex1.toUpperCase();
+		hex2 = hex2.toUpperCase();
 
 		// getting decimal integer value corresponding to hexadecimal numbers
-		
 		int decimal1 = Integer.valueOf(hexToDecimal(hex1));
 		int decimal2 = Integer.valueOf(hexToDecimal(hex2));
 
 		// performing addition and convert back to string 
-		
 		String result = Integer.toString(decimal1 + decimal2);
 
 		// converting back decimal to hexadecimal
-		
 		String resultInHex = decimalToHex(result);
 
 		return resultInHex;
 	}
 
+	/* (non-Javadoc)
+	 * @see BaseConversion#subtract(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public String subtract(String hex1, String hex2) {
 		
+
+		hex1 = hex1.toUpperCase();
+		hex2 = hex2.toUpperCase();
+		int result =0;
+		String resultInHex = "";
 		// getting decimal integer value corresponding to hexadecimal numbers
-		
 		int decimal1 = Integer.valueOf(hexToDecimal(hex1));
 		int decimal2 = Integer.valueOf(hexToDecimal(hex2));
 
 		// performing subtraction and convert back to string 
-		
-		String result = Integer.toString(decimal1 - decimal2);
-
-		String resultInHex = decimalToHex(result);
-
+		result = decimal1 - decimal2;
+		if(result<0)
+		{
+			resultInHex = Integer.toHexString(result);
+		}
+		else {
+		resultInHex = decimalToHex(result+"");
+		}
 		return resultInHex;
 	}
 
+	/* (non-Javadoc)
+	 * @see BaseConversion#multiply(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public String multiply(String hex1, String hex2) {
+		
+
+		hex1 = hex1.toUpperCase();
+		hex2 = hex2.toUpperCase();
 
 		// getting decimal integer value corresponding to hexadecimal numbers
-		
 		int decimal1 = Integer.valueOf(hexToDecimal(hex1));
 		int decimal2 = Integer.valueOf(hexToDecimal(hex2));
 
 		// performing multiplication and convert back to string 
-		
 		String result = Integer.toString(decimal1 * decimal2);
 
 		String resultInHex = decimalToHex(result);
@@ -105,25 +134,40 @@ public class HexCalc implements BaseConversion {
 		return resultInHex;
 	}
 
+	/* (non-Javadoc)
+	 * @see BaseConversion#devide(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public String devide(String hex1, String hex2) {
 
-		// getting decimal integer value corresponding to hexadecimal numbers
+		String resultInHex = "";
+		hex1 = hex1.toUpperCase();
+		hex2 = hex2.toUpperCase();
 		
+		// getting decimal integer value corresponding to hexadecimal numbers
 		int decimal1 = Integer.valueOf(hexToDecimal(hex1));
 		int decimal2 = Integer.valueOf(hexToDecimal(hex2));
 
 		// performing devision and convert back to string 
-		
+		try {
 		String result = Integer.toString(decimal1 / decimal2);
-
-		String resultInHex = decimalToHex(result);
-
+		resultInHex = decimalToHex(result);
+		}
+		catch(ArithmeticException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Devide by zero exception occured");
+		}
 		return resultInHex;
 	}
 
-	// return true if both hex strings are equal
-	
+	/* (non-Javadoc)
+	 * @see BaseConversion#isEqual(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public boolean isEqual(String hex1, String hex2) {
+		
+		hex1 = hex1.toUpperCase();
+		hex2 = hex2.toUpperCase();
 
 		if (hex1.length() == hex2.length()) {
 			if (hex1.compareTo(hex2) == 0)
@@ -135,10 +179,13 @@ public class HexCalc implements BaseConversion {
 		}
 	}
 
-	// return true if first hex strings is greater
-	
+	/* (non-Javadoc)
+	 * @see BaseConversion#isGreater(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public boolean isGreater(String hex1, String hex2) {
-
+		hex1 = hex1.toUpperCase();
+		hex2 = hex2.toUpperCase();
 		if (hex1.length() > hex2.length())
 			return true;
 		else {
@@ -149,8 +196,14 @@ public class HexCalc implements BaseConversion {
 		}
 	}
 
-	// return true if first hex string is lesser
+	/* (non-Javadoc)
+	 * @see BaseConversion#isLesser(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public boolean isLesser(String hex1, String hex2) {
+		
+		hex1 = hex1.toUpperCase();
+		hex2 = hex2.toUpperCase();
 
 		if (hex1.length() < hex2.length())
 			return true;

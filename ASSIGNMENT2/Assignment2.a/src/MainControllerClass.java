@@ -1,54 +1,34 @@
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class MainControllerClass {
 
-	/*
-	 * these are the utility function that we used to show message and get the input
-	 * from the user
-	 */
-
-	// display message to user
-
-	public static void displayOptions() {
-		System.out.println("1. Add hexadecimal numbers");
-
-		System.out.println("2. Subtract hexadecimal numbers");
-
-		System.out.println("3. Multiply hexadecimal numbers");
-
-		System.out.println("4. Devide hexadecimal numbers");
-
-		System.out.println("5. Check, first hexadecimal number is equal to second");
-
-		System.out.println("6. check, first hexadecimal number is greater than second");
-
-		System.out.println("7. check, first hexadecimal number is less than second");
-
-		System.out.println("8. Exit");
-
-	}
-
 	// get first number
 
-	public static String getInputNumber() throws Exception {
-		
+	public static String getInputHexNumber() {
+
 		Scanner sc = new Scanner(System.in);
-		String hexNum1 = sc.next().toUpperCase();
 
-		String hexDigits = "0123456789ABCDEF";
+		String hexNum1 = "";
+		final String pattern = "[0123456789ABCDEF]*";
+		boolean isHex;
+		boolean error = true;
+		do {
+			sc = new Scanner(System.in);
 
-		for (int index = 0; index < hexNum1.length(); index++) {
-			if (!hexDigits.contains("" + hexNum1.charAt(index))) {
-				throw new Exception(" Please Enter proper hex number");
+			System.out.println("Enter hex Number");
+			hexNum1 = sc.next();
+			isHex = Pattern.matches(pattern, hexNum1);
+			if (isHex) {
+				error = false;
+			} else {
+				System.out.println("Please Enter a valid Hex Number");
 			}
-
-		}
-		
+		} while (error == true);
 		return hexNum1;
-		
-	}
 
+	}
 	
 
 	public static void main(String[] args) {
@@ -61,196 +41,113 @@ public class MainControllerClass {
 
 		// create instance for hexCalc class to calculate the hex Arithmetic
 		HexCalc hexCalc = new HexCalc();
+
+		// scanner class instance
 		
 		Scanner sc = new Scanner(System.in);
 
 		boolean flag = true;
-		
+
 		// variable to hold the user choice
-		String choice = "";
+		int choice = 0;
 
-		
 		while (flag != false) {
-			displayOptions();
+			
+			// show options to user
+			System.out.println("1. Add hexadecimal numbers");
 
-			System.out.println("\n\nEnter your choice: ");
+			System.out.println("2. Subtract hexadecimal numbers");
 
-			ArrayList<String> choicelist = new ArrayList<>();
+			System.out.println("3. Multiply hexadecimal numbers");
 
-			choicelist.add("1");
-			choicelist.add("2");
-			choicelist.add("3");
-			choicelist.add("4");
-			choicelist.add("5");
-			choicelist.add("6");
-			choicelist.add("7");
-			choicelist.add("8");
+			System.out.println("4. Devide hexadecimal numbers");
 
-			choice = sc.next();
+			System.out
+					.println("5. Check, first hexadecimal number is equal to second");
+
+			System.out
+					.println("6. check, first hexadecimal number is greater than second");
+
+			System.out
+					.println("7. check, first hexadecimal number is less than second");
+
+			System.out.println("8. Exit");
 
 			// check weather the user enters valid choice
-
-			if (!choicelist.contains(choice)) {
-				System.out.println("Please Enter valid choice");
-			} else {
-
-				switch (Integer.valueOf(choice)) {
-				case 1: {
-
-					// getting input from user
-
-					try {
-						System.out.println("Enter first Hex Number");
-						hexNum1 = getInputNumber();
-						System.out.println("Enter second Hex Number");
-						hexNum2 = getInputNumber();
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						break;
+			boolean error = true;
+			do {
+				try {
+					System.out.println("Enter your choice:\n");
+					sc = new Scanner(System.in);
+					choice = sc.nextInt();
+					if (choice < 1 | choice > 8) {
+						System.out.println("Please Enter a valid positive integer");
+						error = true;
+					} else {
+						error = false;
+						if (choice == 8) {
+							System.out.println("Exiting System");
+							System.exit(0);
+						}
 					}
-
-					// calculating addition of hex numbers
-
-					String add = hexCalc.add(hexNum1, hexNum2);
-					System.out.println("Addition is: " + add);
-
+				} catch (InputMismatchException e) {
+					System.out
+							.println("Input Mismatch Exception occured. Please Enter a valid Positive Integer");
 				}
-					break;
-				case 2: {
+			} while (error == true);
 
-					// getting input from user
+			// getting input from user
 
-					try {
-						System.out.println("Enter first Hex Number");
-						hexNum1 = getInputNumber();
-						System.out.println("Enter second Hex Number");
-						hexNum2 = getInputNumber();
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						break;
-					}
+			hexNum1 = getInputHexNumber();
+			hexNum2 = getInputHexNumber();
 
-					// calculating subtraction of hex numbers
+			switch (choice) {
+			case 1: 
+				// calculating addition of hex numbers
+				String add = hexCalc.add(hexNum1, hexNum2);
+				System.out.println("Addition is: " + add);
+				break;
+			
+			case 2:
+				// calculating subtraction of hex numbers
+				String sub = hexCalc.subtract(hexNum1, hexNum2);
+				System.out.println("Subtraction is: " + sub);
+				break;
+			
+			case 3:
+				// calculating multiplication of hex numbers
+				String mul = hexCalc.multiply(hexNum1, hexNum2);
+				System.out.println("Multilication is: " + mul);
+				break;
+			
+			case 4:
+				// calculating devision of hex numbers
+				String dev = hexCalc.devide(hexNum1, hexNum2);
+				System.out.println("Devision is: " + dev);
+				break;
+			
+			case 5:
+				// check for equal of hex strings
+				boolean isEqual = hexCalc.isEqual(hexNum1, hexNum2);
+				System.out.println("is equal? " + isEqual);
+				break;
 
-					String add = hexCalc.subtract(hexNum1, hexNum2);
-					System.out.println("Subtraction is: " + add);
+			case 6:
+				// check weather first string is greater than second or not
+				boolean isGreater = hexCalc.isGreater(hexNum1, hexNum2);
+				System.out.println("is greater? " + isGreater);
+				break;
 
-				}
-					break;
-				case 3: {
+			case 7:
+				// check weather first string is lesser than second or not
+				boolean isLesser = hexCalc.isLesser(hexNum1, hexNum2);
+				System.out.println("is lesser? " + isLesser);
+				break;
 
-					// getting input from user
-
-					try {
-						System.out.println("Enter first Hex Number");
-						hexNum1 = getInputNumber();
-						System.out.println("Enter second Hex Number");
-						hexNum2 = getInputNumber();
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						break;
-					}
-
-					// calculating multiplication of hex numbers
-
-					String add = hexCalc.multiply(hexNum1, hexNum2);
-					System.out.println("Multilication is: " + add);
-
-				}
-					break;
-				case 4: {
-
-					// getting input from user
-
-					try {
-						System.out.println("Enter first Hex Number");
-						hexNum1 = getInputNumber();
-						System.out.println("Enter second Hex Number");
-						hexNum2 = getInputNumber();
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						break;
-					}
-
-					// calculating devision of hex numbers
-
-					String add = hexCalc.devide(hexNum1, hexNum2);
-					System.out.println("Devision is: " + add);
-
-				}
-					break;
-				case 5: {
-
-					// getting input from user
-
-					try {
-						System.out.println("Enter first Hex Number");
-						hexNum1 = getInputNumber();
-						System.out.println("Enter second Hex Number");
-						hexNum2 = getInputNumber();
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						break;
-					}
-
-					// calculating comparison of hex numbers
-
-					boolean isEqual = hexCalc.isEqual(hexNum1, hexNum2);
-					System.out.println("is equal? " + isEqual);
-
-				}
-					break;
-				case 6: {
-
-					// getting input from user
-
-					try {
-						System.out.println("Enter first Hex Number");
-						hexNum1 = getInputNumber();
-						System.out.println("Enter second Hex Number");
-						hexNum2 = getInputNumber();
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						break;
-					}
-					// calculating comparison of hex numbers
-
-					boolean isGreater = hexCalc.isGreater(hexNum1, hexNum2);
-					System.out.println("is greater? " + isGreater);
-
-				}
-					break;
-				case 7: {
-
-					// getting input from user
-
-					try {
-						System.out.println("Enter first Hex Number");
-						hexNum1 = getInputNumber();
-						System.out.println("Enter second Hex Number");
-						hexNum2 = getInputNumber();
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						break;
-					}
-
-					// calculating comparison of hex numbers
-
-					boolean isLesser = hexCalc.isLesser(hexNum1, hexNum2);
-					System.out.println("is lesser? " + isLesser);
-
-				}
-					break;
-				case 8: {
-					System.out.println("Exit:");
-					flag = false;
-				}
-
-				}
 			}
 
 		}
-
+		sc.close();
 	}
 
 }
