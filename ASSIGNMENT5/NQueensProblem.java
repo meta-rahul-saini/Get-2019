@@ -22,42 +22,30 @@ public class NQueensProblem {
 	//check the next chosen place is valid or not
 	public static boolean isValid(int [][]board, int rowValue, int columnValue, int n){
 		int row = 0, column = 0;
+		
+		// check in same rows and columns for attack
+		
 		while(row < n && column < n){
 			if(board[row][columnValue] == 1 || board[rowValue][column] == 1){
 				return false;
 			}
 			row+=1; column+=1;
 		}
-		row = rowValue; column = columnValue;
-		while(row>=0 && column>=0){
-			if(board[row][column] == 1){
-				return false;
-			}
-			row-=1; column-=1;
-		}
-		row = rowValue; column = columnValue;
-		while(row<n && column<n){
-			if(board[row][column] == 1){
-				return false;
-			}
-			row+=1; column+=1;
-		}
-		row = rowValue; column = columnValue;
-		while(row<n && column>=0){
-			if(board[row][column] == 1){
-				return false;
-			}
-			row += 1;
-			column -= 1;
-		}
-		row = rowValue; column = columnValue;
-		while(row>=0 && column<n){
-			if(board[row][column] == 1){
-				return false;
-			}
-			row -= 1;
-			column += 1;
-		}
+		
+		// check in both diagonal for attack
+		
+		for(int k=0;k<n;k++)
+        {
+            for(int l=0;l<n;l++)
+            {
+                if(((k+l) == (rowValue+columnValue)) || ((k-l) == (rowValue-columnValue)))
+                {
+                    if(board[k][l] == 1)
+                        return false;
+                }
+            }
+           
+        }
 		return true;
 	}
 	
