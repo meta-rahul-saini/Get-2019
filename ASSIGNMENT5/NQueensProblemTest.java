@@ -37,10 +37,11 @@ public class NQueensProblemTest {
 	   }
 	   
 	   @Test
-	   public void testMaxMirror() {
+	   public void testNQueensProblem() {
 		  System.out.println(" " + inputNumber);
 		  int[][] board = nQueensProblem.createBoard(inputNumber);
+		  int startRow  = 0;
 	      assertEquals(expectedResult, 
-	    		  nQueensProblem.nQueen(board,0,inputNumber));
+	    		  nQueensProblem.nQueen(board, startRow,inputNumber));
 	   } 
 }
