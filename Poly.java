@@ -37,19 +37,11 @@ public class Poly {
 	 */
 	public float evaluate(float x)
 	{
-		int size = this.size();
-		float currentCoeficient  = 0; 
 		float result = 0;
-//		for(int index = 0;index< size; index++)
-//		{
-//			result += poly[index][coeficientIndex]* Math.pow(x, poly[index][powerOfPolyIndex]);
-//			result += poly.
-//		}
 		
 		for(int currentPower: poly.keySet())
 		{
-			currentCoeficient = poly.get(currentPower);
-			result += currentCoeficient* Math.pow(x, currentPower);
+			result += poly.get(currentPower)* Math.pow(x, currentPower);
 		}
 		return result;
 	}
@@ -59,7 +51,6 @@ public class Poly {
 	 */
 	public int degree()
 	{
-		int size = this.size();
 		float maxPower = 0;
 		
 		for(int currentPower: poly.keySet())
@@ -85,6 +76,7 @@ public class Poly {
 		HashMap< Integer, Float> p1Poly = this.getPoly();
 		
 		HashMap< Integer, Float> p2Poly = poly2.getPoly();
+		
 		
 		for (Integer currentPower: p1Poly.keySet())
 		{
@@ -113,15 +105,16 @@ public class Poly {
 		
 		HashMap< Integer, Float> p2Poly = poly2.getPoly();
 		
-		for (Integer currentPower1: p1Poly.keySet())
+		if(!(poly2.getPoly().size()==0))
 		{
-			
-			for(Integer currentPower2: p2Poly.keySet())
+			for (Integer currentPower1: p1Poly.keySet())
 			{
+				for(Integer currentPower2: p2Poly.keySet())
+				{
 					poly.insert(p1Poly.get(currentPower1)*p2Poly.get(currentPower2), currentPower1 + currentPower2);		
+				}
 			}
 		}
-		
 		return poly;
 	}
 
@@ -145,11 +138,11 @@ public class Poly {
 		 
 		 Poly poly1 = new Poly();
 			poly1.insert(4, 2);
-			poly1.insert(3,  1);
+			poly1.insert(3,  3);
 		poly1.showPoly();
 		
 		 Poly poly2 = new Poly();
-			poly2.insert(5,  0);
+			poly2.insert(5,  2);
 			poly2.insert(9, 3);
 		poly2.showPoly();
 		
