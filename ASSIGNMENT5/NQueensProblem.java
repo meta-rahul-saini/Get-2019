@@ -7,7 +7,7 @@ public class NQueensProblem {
 	 * @param size:	size of chaseBoard
 	 * @return	returns chaseBoard reference
 	 */
-	public static int[][] createBoard(final int size){
+	public int[][] createBoard(final int size){
 		if(size<0){
 			throw new AssertionError("number must be positive.");
 		}
@@ -28,7 +28,7 @@ public class NQueensProblem {
 	 * @param columnIndex: column index of position for which we want to check
 	 * @return	returns true, if given position is attacked o/w false
 	 */
-	public static boolean isAttack(int rowIndex, int columnIndex){
+	public boolean isAttack(int rowIndex, int columnIndex){
 		int currentRowIndex = 0, currentColumnIndex = 0;
 		
 		// check in same rows and columns for attack
@@ -61,7 +61,7 @@ public class NQueensProblem {
 	 * @param rowValue	row index of position
 	 * @param columnValue	column index of position
 	 */
-	public static void applyValue(int rowIndex, int columnIndex){
+	public void applyValue(int rowIndex, int columnIndex){
 		board[rowIndex][columnIndex] = 1;
 	}
 	
@@ -69,7 +69,7 @@ public class NQueensProblem {
 	 * @param rowValue
 	 * @param columnValue
 	 */
-	public static void removeValue(int rowIndex, int columnIndex){
+	public void removeValue(int rowIndex, int columnIndex){
 		board[rowIndex][columnIndex] = 0;
 	}
 	
@@ -77,7 +77,7 @@ public class NQueensProblem {
 	/**
 	 * it shows board after setting placing each queen on appropriate position
 	 */
-	public static void displayBoard(){
+	public void displayBoard(){
 		System.out.println("board: ");
 		for(int i = 0; i<boardSize;i++){
 			for (int j=0;j<boardSize;j++){
@@ -95,15 +95,14 @@ public class NQueensProblem {
 	 * @param dimensionOfMatrix	it is initial dimension of matrix.
 	 * @return it returns false, if it is not possible to place given N queen on N*N chaseBoard. o/w it returns true, with placing the N queens on N*N board.
 	 */
-	public static boolean SolveNQueen(int[][] board, int startRow, int dimensionOfMatrix){
+	public boolean SolveNQueen(int[][] board, int startRow, int dimensionOfMatrix){
 		
 		if(dimensionOfMatrix == 0){
 			displayBoard();
 			return true;
 		}
 		
-		// if startRow is greater than 0 then start from startRow index o/w start from 0
-		if(startRow>0){
+		
 			for (int rowIndex = 0; rowIndex < boardSize; rowIndex++){
 				for (int columnIndex = startRow; columnIndex < boardSize; columnIndex++){
 					if( isAttack(rowIndex, columnIndex)){
@@ -118,32 +117,7 @@ public class NQueensProblem {
 					}
 				}
 			}
-		}
-	
-		else{
-			for (int rowIndex = 0; rowIndex < boardSize; rowIndex++){
-				for (int columnIndex = 0; columnIndex < boardSize; columnIndex++){
-					if( isAttack(rowIndex, columnIndex)){
-						applyValue(rowIndex, columnIndex);
-						dimensionOfMatrix -= 1;
-						
-						if(SolveNQueen(board, rowIndex, dimensionOfMatrix)){
-							return true;
-						}
-						removeValue(rowIndex, columnIndex);
-						dimensionOfMatrix += 1;
-					}
-				}
-			}
-		}
 		return false;
 	}
 	
-	
-// 	public static void main(String[] args){
-// 		int boardSize = 9;
-// 		int board[][] = createBoard(9);
-// 		int startRow = 6;
-// 		System.out.print(SolveNQueen(board, startRow, boardSize));
-// 	}
 }
