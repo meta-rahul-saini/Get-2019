@@ -5,28 +5,31 @@ public class SparseMatrix {
 
 	final private int MAX = 1000;
 
-	int data[][] = new int[MAX][3];
+	int data[][];
 	// dimensions of matrix
 	private int rowLength, columnLength;
 
 	// total number of elements in matrix
 	int lenghtOfArray;
 
-	public SparseMatrix(int rowLength, int columnLength) {
+	public SparseMatrix(int rowLength, int columnLength) 
+	{
 
 		// initialize rowLength
 		this.rowLength = rowLength;
 
 		// initialize column
 		this.columnLength = columnLength;
-
+		
+		data = new int[MAX][3]; 
+		
 		// initialize length to 0
 		lenghtOfArray = 0;
 	}
 
 	// insert elements into sparse matrix
 	/**
-	 * insert the entry of sparse matrix into 3D array
+	 * insert the entry of sparse matrix into 3D array, throws AssertionError if wrong entry is passed;
 	 * 
 	 * @param rowLength
 	 *            , rowLengthIndex of value in sparse matrix
@@ -40,7 +43,9 @@ public class SparseMatrix {
 
 		// invalid entry
 		if (rowLength > this.rowLength || columnLength > this.columnLength) {
+			
 			System.out.println("Wrong entry");
+			throw new AssertionError("Wrong Entry");
 		}
 
 		else {
@@ -65,11 +70,14 @@ public class SparseMatrix {
 		final int columnIndex = 0;
 		// if matrices don't have same dimensions
 		if (this.rowLength != b.getcolumnLength()
-				|| this.columnLength != b.getcolumnLength()) {
+				|| this.columnLength != b.getcolumnLength()) 
+		{
 			System.out.println("Matrices can't be added");
+			throw new AssertionError("Matrices have different dimensions, so they can't be added");
 		}
 
-		else {
+		else 
+		{
 
 			int indexOfA = 0, indexOfB = 0;
 			SparseMatrix result = new SparseMatrix(this.rowLength,
@@ -90,22 +98,19 @@ public class SparseMatrix {
 					indexOfB++;
 				}
 
-				// if a's rowLength and col is smaller
+				// if a's rowLength is smaller
 				else if (data[indexOfA][rowIndex] < b.data[indexOfB][rowIndex]
 						|| (data[indexOfA][rowIndex] == b.data[indexOfB][0] && data[indexOfA][columnIndex] < b.data[indexOfB][columnIndex]))
-
 				{
-
 					// insert smaller value into result
 					result.insert(data[indexOfA][0], data[indexOfA][1],
 							data[indexOfA][2]);
-
 					indexOfA++;
 				}
-
+				
+				// if both's matrices have value on same index then simply add them and insert to results
 				else {
-
-					// add the values as rowLength and col is same
+					// add the values as rowLength and column is same
 					int addedval = data[indexOfA][2] + b.data[indexOfB][2];
 
 					if (addedval != 0)
@@ -123,138 +128,50 @@ public class SparseMatrix {
 
 	public SparseMatrix transpose() {
 
-		// new matrix with inversed rowLength X col
-		SparseMatrix result = new SparseMatrix(this.columnLength,
-				this.rowLength);
+		final int ROW_INDEX = 0;
+		final int COLUMN_INDEX = 1;
+		final int VALUE = 2;
+		
+		SparseMatrix result = new SparseMatrix(this.columnLength, this.rowLength);
 
-		// same number of elements
-		result.lenghtOfArray = this.lenghtOfArray;
-
-		// to count number of elements in each columnLength
-		int count[] = new int[this.columnLength + 1];
-
-		// initialize all to 0
-		for (int i = 1; i <= this.columnLength; i++)
-			count[i] = 0;
-
-		for (int i = 0; i < this.lenghtOfArray; i++)
-			count[data[i][1]]++;
-
-		int[] index = new int[this.columnLength + 1];
-
-		// to count number of elements having col smaller
-		// than particular i
-
-		// as there is no col with value < 1
-		index[1] = 0;
-
-		// initialize rest of the indices
-		for (int i = 2; i <= this.columnLength; i++)
-
-			index[i] = index[i - 1] + count[i - 1];
-
-		for (int i = 0; i < this.lenghtOfArray; i++) {
-
-			// insert a data at rpos and increment its value
-			int rpos = index[data[i][1]]++;
-
-			// transpose rowLength=col
-			result.data[rpos][0] = data[i][1];
-
-			// transpose col=rowLength
-			result.data[rpos][1] = data[i][0];
-
-			// same value
-			result.data[rpos][2] = data[i][2];
+		int data[];
+		for(int index1 = 0 ; index1 < this.getLenghtOfArray(); index1++)
+		{
+			data = this.data[index1];
+			
+			result.insert(data[COLUMN_INDEX], data[ROW_INDEX], data[VALUE]);
 		}
 		return result;
 	}
 
-	// the above method ensures
-	// sorting of transpose matrix
-	// according to rowLength-col value
 
-	// }
-	//
 	 public SparseMatrix multiply(SparseMatrix b)
 	 {
 	
-	 if (this.lenghtOfArray != b.rowLength) {
-	
-	 // Invalid multiplication
-	 System.out.println("Can't multiply, "
-	 + "Invalid dimensions");
-	 }
-	
-	 // transpose b to compare rowLength
-	 // and col values and to add them at the end
-	 b = b.transpose();
-	 int apos, bpos;
-	
-	 // result matrix of dimension rowLength X b.col
-	 // however b has been transposed, hence rowLength X b.rowLength
-	 SparseMatrix result = new SparseMatrix(rowLength, b.rowLength);
-	
-	 // iterate over all elements of A
-	 for (apos = 0; apos < this.lenghtOfArray;) {
-	
-	 // current rowLength of result matrix
-	 int r = data[apos][0];
-	
-	 // iterate over all elements of B
-	 for (bpos = 0; bpos < b.lenghtOfArray;) {
-	
-	 // current columnLength of result matrix
-	 // data[][0] used as b is transposed
-	 int c = b.data[bpos][0];
-	
-	 // temporary pointers created to add all
-	 // multiplied values to obtain current
-	 // element of result matrix
-	 int tempa = apos;
-	 int tempb = bpos;
-	
-	 int sum = 0;
-	
-	 // iterate over all elements with
-	 // same rowLength and col value
-	 // to calculate result[r]
-	 while (tempa < this.columnLength && data[tempa][0] == r
-	 && tempb < b.lenghtOfArray && b.data[tempb][0] == c) {
-	
-	 if (data[tempa][1] < b.data[tempb][1])
-	
-	 // skip a
-	 tempa++;
-	
-	 else if (data[tempa][1] > b.data[tempb][1])
-	
-	 // skip b
-	 tempb++;
-	 else
-	
-	 // same col, so multiply and increment
-	 sum += data[tempa++][2] * b.data[tempb++][2];
-	 }
-	
-	 // insert sum obtained in result[r]
-	 // if its not equal to 0
-	 if (sum != 0)
-	 result.insert(r, c, sum);
-	
-	 while (bpos < b.lenghtOfArray && b.data[bpos][0] == c)
-	
-	 // jump to next columnLength
-	 bpos++;
-	 }
-	
-	 while (apos < this.lenghtOfArray && data[apos][0] == r)
-	
-	// jump to next rowLength
-	 apos++;
-	 }
-	
-	 return result;
+		 final int LENGTH_OF_A = this.getLenghtOfArray();
+		 
+		 final int LENGTH_OF_B = b.getLenghtOfArray();
+		 
+		 SparseMatrix mul = new SparseMatrix(4, 4);
+		 
+		 int index_mul = 0;
+//		 for( int index1 = 0; index1 < LENGTH_OF_A; index1++ )
+//		 {
+//			 for (int index2 = 0; index2 < LENGTH_OF_B; index2++ )
+//			 {
+//				 int row1 = this.data[index1][0];
+//				 int col1 = this.data[index1][1];
+//				 
+//				 int row2 = b.data[index2][0];
+//				 int col2 = b.data[index2][1];
+//				 if(col1==row2)
+//				 {
+//					 mul.data[index_mul][0] = row1;
+//					 mul.data[index_mul][1] = col2;
+//					 mul.data[index_mul][2] = this.data[index1][2]*b.data[index2][2];  
+//				}
+//			 }
+	 return mul;
 	 }
 	//
 	// // printing matrix
@@ -287,18 +204,13 @@ public class SparseMatrix {
 		b.insert(4, 1, 20);
 		b.insert(4, 2, 25);
 
+		System.out.println("normal matrix");
+		a.print();
 		SparseMatrix c = a.transpose();
-		// Output result
-		a.add(b);
-		// System.out.println("\nMultiplication: ");
-		// a.multiply(b);
-		// System.out.println("\nTranspose: ");
-		// sparse_matrix atranspose = a.transpose();
-		// atranspose.print();
-		c = a.transpose();
-		
-		SparseMatrix d  = a.multiply(b);
-		d.print();
+
+		System.out.println("transpose");
+		c.print();
+
 	}
 
 	public int getrowLength() {
