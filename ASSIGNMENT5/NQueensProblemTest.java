@@ -8,7 +8,8 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class NQueensProblemTest {
-	 private int inputNumber;
+	 private int dimension;
+	 private int startRow;
 	 private boolean expectedResult;
 	 private NQueensProblem nQueensProblem;
 	 
@@ -17,31 +18,32 @@ public class NQueensProblemTest {
 		 nQueensProblem = new NQueensProblem();
 	 }
 	 
-	 public NQueensProblemTest(int inputNumber, boolean expectedResult) {
-	      this.inputNumber = inputNumber;
+	 public NQueensProblemTest(int dimension, int startRow, boolean expectedResult) {
+	      this.dimension = dimension;
+	      this.startRow = startRow;
 	      this.expectedResult = expectedResult;
 	 }
 	 
 	 @Parameterized.Parameters
 	   public static Collection<Object[]> parameters() {
 	      return Arrays.asList(new Object[][] {
-	    	 { 2, false},
-	    	 { 3, false },
-	         { 4, true },
-	         { 5, true },
-	         { 6, true },
-	         { 7, true },
-	         { 8, true },
-	         { 9, true },
+		 {0, 0, true},
+	    	 { 2, 0, false},
+	    	 { 3, 0, false },
+	         { 4, 2, true },
+	         { 5, 2, true },
+	         { 6, 5, true },
+	         { 7, 3, true },
+	         { 8, 3, true },
+	         { 9, 8, true },
 	      });
 	   }
 	   
 	   @Test
-	   public void testNQueensProblem() {
-		  System.out.println(" " + inputNumber);
-		  int[][] board = nQueensProblem.createBoard(inputNumber);
-		  int startRow  = 0;
+	   public void testMaxMirror() {
+		  System.out.println(" " + dimension);
+		  int[][] board = nQueensProblem.createBoard(dimension);
 	      assertEquals(expectedResult, 
-	    		  nQueensProblem.nQueen(board, startRow,inputNumber));
+	    		  nQueensProblem.SolveNQueen(board,startRow,dimension));
 	   } 
 }
