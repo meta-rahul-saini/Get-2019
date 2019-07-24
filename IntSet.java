@@ -1,5 +1,4 @@
 
-
 import java.util.Arrays;
 import java.util.TreeSet;
 
@@ -38,19 +37,43 @@ public class IntSet {
 		this.intSet = array1;
 	}
 	
+	
+	
 	/** checks weather x is member of intSet or not
 	 * @param x, element to be checked
 	 * @return true if element is member of set o/w return false;
 	 */
 	public boolean isMember(int x)
 	{
-		if(Arrays.binarySearch(intSet, x) < 0)
+		if(binarySearch(this.intSet, x) == -1)
 		{
 			return false;
 		}
 		return true;
 	}
 	
+	
+	/** function to search element using binary search in sorted set
+	 * @param input, input sorted array
+	 * @param number, element to be search
+	 * @return return index if element is found o/w return -1;
+	 */
+	public int binarySearch(Integer[] input, int number) {
+        int first = 0;
+        int last = input.length - 1;
+        int middle = (first + last) / 2;
+        while (first <= last) {
+            if (input[middle] == number) {
+                first = middle + 1;
+            } else if (input[middle] == number) {
+                return middle;
+            } else {
+                last = middle - 1;
+            }
+            middle = (first + last) / 2;
+        }
+        return -1;
+    }
 	
 	/**
 	 * @return size of intSet
@@ -75,7 +98,7 @@ public class IntSet {
 		
 		for (int index = 0; index < SIZE_OF_TARGET_SET; index++)
 		{
-			if(Arrays.binarySearch(this.intSet, targetSet.intSet[index]) < 0)
+			if(binarySearch(this.intSet, targetSet.intSet[index]) < 0)
 			{
 				return false;
 			}
@@ -212,9 +235,9 @@ public class IntSet {
 		IntSet s2 = new IntSet(new Integer[] {10, 11});
 		
 		
-//		IntSet s3 = s1.getComplement();
-//		s3.showIntSet();
-//		
+		IntSet s3 = s1.getComplement();
+		s3.showIntSet();
+		
 		IntSet s4 = s1.union(s2);
 		s4.showIntSet();
 		IntSet s5 = s1.getComplement();
