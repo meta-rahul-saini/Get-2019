@@ -49,17 +49,21 @@ public class Square implements Shape {
 
 		return perimeter;
 	}
+	
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Shape#isPointEnclosed()
+	/* (non-Javadoc)
+	 * @see Shape#isPointEnclosed(double, double)
 	 */
 	@Override
-	public boolean isPointEnclosed() {
+	public boolean isPointEnclosed(float x, float y) {
+		if (x <= (this.originX + this.width)
+				&& (y <= (this.originY + this.width))) {
+			if ((x >= this.originX) && (y > this.originY)) {
+				return true;
+			}
+		}
 		return false;
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -129,4 +133,5 @@ public class Square implements Shape {
 	public void setOriginY(float originY) {
 		this.originY = originY;
 	}
+
 }
