@@ -53,5 +53,4 @@ public class ScreenNegativeTest {
 		// test2: passing invalid co-ordinates
 		assertEquals(false, screen.deleteShape(point1));
 	}
-
 }
