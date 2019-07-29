@@ -1,227 +1,56 @@
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-/**
- * screen class, that supports following methods Add a shape object to the
- * screen at a specified location with default orientation. Delete a shape
- * object from the screen Delete all shape objects of a specific type Return the
- * shape objects on the screen sorted in desired ascending order based on area,
- * perimeter, timestamp or origin distance (distance of the origin of the shape
- * from the origin of the screen). Consider various design options for this
- * method. Return the list of shape objects enclosing a specified point.
- * 
- * @author rahul
- */
-public class Screen {
+import org.junit.Test;
 
-	private Map<Point, Shape> shapeMap = new HashMap<>();
-	private float X_MAX = 100;
-	private float Y_MAX = 100;
+public class ScreenNegativeTest {
 
 	/**
-	 * function to add shape to screen at point specified by Point class
-	 * 
-	 * @param shapeType,
-	 *            specifies type of shape
-	 * @param point,
-	 *            specifies origin of shape
-	 * @param parameters,
-	 *            specifies parameters of shape like width, height, etc.
+	 * this function has negative test cases for addShape method in screen class
 	 */
-	public boolean addShape(Shape.ShapeType shapeType, Point point, List<Integer> parameters) {
-		try {
-			Shape shape = ShapeFactory.createShape(shapeType, parameters);
-			float xCordinate = point.getX();
-			float yCordinate = point.getY();
-			// if points is outside the range of screen return false
-			if (xCordinate > X_MAX || yCordinate > Y_MAX || xCordinate < 0 || yCordinate < 0)
-				return false;
+	@Test
+	public void addShape() {
+		Screen screen = new Screen();
 
-			shape.setOriginX(point.getX());
-			shape.setOriginY(point.getY());
-			shapeMap.put(point, shape);
-		} catch (AssertionError e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
+		Point point1 = new Point();
+		point1.setX(1);
+		point1.setY(1);
+
+		List<Integer> parameters = new ArrayList<>();
+		parameters.add(4);
+
+		// test1: passing invalid no. of arguments
+		assertEquals(false, screen.addShape(Shape.ShapeType.RECTANGLE, point1, parameters));
+
+		Point point2 = new Point();
+		point2.setX(2);
+		point2.setY(-2);
+
+		// test2: passing invalid co-ordinates
+		assertEquals(false, screen.addShape(Shape.ShapeType.RECTANGLE, point2, parameters));
 	}
 
 	/**
-	 * function to delete a specific shape from screen
-	 * 
-	 * @param shape,
-	 *            shape object to be removed @return, true if object removed
-	 *            successfully o/w return false
+	 * this function has negative test cases for deleteShape method in screen class
 	 */
-	public boolean deleteShape(Point point) {
-		if (shapeMap.containsKey(point)) {
-			shapeMap.remove(point);
-			return true;
-		} else {
-			return false;
-		}
-	}
+	@Test
+	public void deleteShape() {
+		Screen screen = new Screen();
 
-	/**
-	 * function to delete all the shapes of specified type
-	 * 
-	 * @param shapeType,
-	 *            type of shapes
-	 * @return true if shape is successfully removed o/w false is returned
-	 */
-	public boolean deleteAll(Shape.ShapeType shapeType) {
-		boolean flag = false;
-		for (Point point : shapeMap.keySet()) {
-			if (shapeMap.get(point).getShapeType() == shapeType) {
-				shapeMap.remove(point);
-				flag = true;
-			}
-		}
-		return flag;
-	}
+		Point point1 = new Point();
+		point1.setX(1);
+		point1.setY(-1);
 
-	/**
-	 * function to sorts shapes by their area and return list of shapes
-	 * 
-	 * @return list of shapes is returned
-	 */
-	public List<Shape> getShapesSortedByArea() {
+		List<Integer> parameters = new ArrayList<>();
+		parameters.add(4);
+		parameters.add(3);
 
-		// getting shapeList from hashMAP
-		List<Map.Entry<Point, Shape>> shapeList = new LinkedList<Map.Entry<Point, Shape>>(shapeMap.entrySet());
+		// test1: passing invalid no. of arguments
+		assertEquals(false, screen.addShape(Shape.ShapeType.RECTANGLE, point1, parameters));
 
-		// sorting the list by using the comparator method
-		Collections.sort(shapeList, new Comparator<Map.Entry<Point, Shape>>() {
-			public int compare(Map.Entry<Point, Shape> entry1, Map.Entry<Point, Shape> entry2) {
-				return ((Float) entry1.getValue().getArea()).compareTo((Float) entry2.getValue().getArea());
-			}
-		});
-
-		// convert from list of map entries to list of shapes sorted by area
-		List<Shape> shapeList1 = new ArrayList<>();
-		for (Map.Entry<Point, Shape> entry : shapeList) {
-			shapeList1.add(entry.getValue());
-		}
-
-		return shapeList1;
-	}
-
-	/**
-	 * function to sorts shapes by their perimeter area and return list of shapes
-	 * 
-	 * @return list of shapes is returned
-	 */
-	public List<Shape> getShapesSortedByPerimeter() {
-		// getting shapeList from hashMAP
-		List<Map.Entry<Point, Shape>> shapeList = new LinkedList<Map.Entry<Point, Shape>>(shapeMap.entrySet());
-
-		// sorting the list by using the comparator method
-		Collections.sort(shapeList, new Comparator<Map.Entry<Point, Shape>>() {
-			public int compare(Map.Entry<Point, Shape> entry1, Map.Entry<Point, Shape> entry2) {
-				return ((Float) entry1.getValue().getPerimeter()).compareTo((Float) entry2.getValue().getPerimeter());
-			}
-		});
-
-		// convert from list of map entries to list of shapes sorted by perimeter
-		List<Shape> shapeList1 = new ArrayList<>();
-		for (Map.Entry<Point, Shape> entry : shapeList) {
-			shapeList1.add(entry.getValue());
-		}
-
-		return shapeList1;
-	}
-
-	/**
-	 * function to sorts shapes by their timeStamp and return list of shapes
-	 * 
-	 * @return list of shapes is returned
-	 */
-	public List<Shape> getShapesSortedByTimeStamp() {
-		// converting into list from hashMap
-		List<Map.Entry<Point, Shape>> shapeList = new LinkedList<Map.Entry<Point, Shape>>(shapeMap.entrySet());
-
-		// sorting the list by using the comparator method
-		Collections.sort(shapeList, new Comparator<Map.Entry<Point, Shape>>() {
-			public int compare(Map.Entry<Point, Shape> entry1, Map.Entry<Point, Shape> entry2) {
-				return entry1.getValue().getDate().compareTo(entry2.getValue().getDate());
-			}
-		});
-
-		List<Shape> shapeList1 = new ArrayList<>();
-
-		// convert from list of map entries to list of shapes sorted by timeStamp
-		for (Map.Entry<Point, Shape> entry : shapeList) {
-			shapeList1.add(entry.getValue());
-		}
-
-		return shapeList1;
-	}
-
-	/**
-	 * function to sorts shapes by their distance from their origin to screen origin
-	 * and return list of shapes
-	 * 
-	 * @return list of shapes is returned
-	 */
-	public List<Shape> getShapesSortedByOrigin() {
-		// converting into list from hashMap
-
-		List<Map.Entry<Point, Shape>> shapeList = new LinkedList<Map.Entry<Point, Shape>>(shapeMap.entrySet());
-
-		// sorting the list by using the comparator method
-		Collections.sort(shapeList, new Comparator<Map.Entry<Point, Shape>>() {
-			public int compare(Map.Entry<Point, Shape> entry1, Map.Entry<Point, Shape> entry2) {
-				Float distOrigin1 = null;
-				Float distOrigin2 = null;
-				float x1 = 0;
-				float x2 = 0;
-				float y1 = 0;
-				float y2 = 0;
-
-				x1 = entry1.getKey().getX();
-				y1 = entry1.getKey().getY();
-
-				x2 = entry2.getKey().getX();
-				y2 = entry2.getKey().getY();
-
-				distOrigin1 = (float) Math.sqrt((x1 * x1 + y1 * y1));
-				distOrigin2 = (float) Math.sqrt((x2 * x2 + y2 * y2));
-
-				return (distOrigin1).compareTo(distOrigin2);
-			}
-		});
-
-		// convert from list of map entries to list of shapes sorted by distance from
-		// origin
-		List<Shape> shapeList1 = new ArrayList<>();
-		for (Map.Entry<Point, Shape> entry : shapeList) {
-			shapeList1.add(entry.getValue());
-		}
-
-		return shapeList1;
-	}
-	
-
-	/**
-	 * function to return shapes enclosing a point
-	 * 
-	 * @return list of shapes is returned
-	 */
-	public List<Shape> getListOfShapesEnclosingAPoint(float x, float y) {
-
-		List<Shape> shapeList = new ArrayList<>();
-		for (Shape shape : shapeMap.values()) {
-			
-			if(shape.isPointEnclosed(x, y))
-				shapeList.add(shape);
-		}
-		return shapeList;
+		// test2: passing invalid co-ordinates
+		assertEquals(false, screen.deleteShape(point1));
 	}
 }
