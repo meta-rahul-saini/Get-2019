@@ -1,8 +1,8 @@
 import java.util.Date;
 
 /**
- * class to represent Triangle shape
- * 
+ * class to represent Triangle shape, here we assume Right angle triangle where point A is on 90 degree, 
+ * sideA is parallel to X and sideB is parallel to Y and other is sideC
  * @author rahul
  *
  */
@@ -56,14 +56,44 @@ public class Triangle implements Shape {
 		return perimeter;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Shape#isPointEnclosed()
+	/* (non-Javadoc)
+	 * @see Shape#isPointEnclosed(float, float)
 	 */
 	@Override
-	public boolean isPointEnclosed() {
-		return false;
+	public boolean isPointEnclosed(float x, float y) {
+		
+		float xCoordOfA = this.originX;
+		float yCoordOfA = this.originY;
+		
+		float xCoordOfB = this.originX;
+		float yCoordOfB = this.originY + this.sideB;
+		
+		float xCoordOfC  = this.originX + this.sideA;
+		float yCoordOfC  = this.originY;
+		
+		float distFromA = (float) Math.sqrt((Math.pow((x - xCoordOfA), 2)) + Math.pow((y - yCoordOfA), 2));
+		System.out.println("distFromA: " + distFromA);
+		float distFromB = (float) Math.sqrt((Math.pow((x - xCoordOfB), 2)) + Math.pow((y - yCoordOfB), 2));
+		float distFromC = (float) Math.sqrt((Math.pow((x - xCoordOfC), 2)) + Math.pow((y - yCoordOfC), 2));
+		
+		float pAPB = (distFromA + distFromB + this.sideB) / 2.0F;
+		float areaOfAPB = (float) (Math.sqrt(pAPB * (pAPB - distFromA) * (pAPB - distFromB) * (pAPB - this.sideB)));
+		
+		float pAPC = (this.sideA + distFromA + distFromC) / 2.0F;
+		float areaOfAPC = (float) (Math.sqrt(pAPC * (pAPC - sideA) * (pAPC - distFromB) * (pAPC -distFromC)));
+		
+		float pBPC = (distFromB + this.sideC + distFromC) / 2.0F;
+		float areaOfBPC = (float) (Math.sqrt(pBPC * (pBPC - distFromB) * (pBPC - sideC) * (pBPC -distFromC)));
+		
+		float areaOfABC = this.getArea();
+		
+		System.out.println("area of ABC: "+ Math.round(this.getArea()) + "area of computed Sides" + Math.round(areaOfAPB + areaOfAPC + areaOfBPC));
+		
+		// if point is enclosed by triangle then following area is equal o/w not equal 
+		if(  Math.round(areaOfABC) == Math.round((areaOfAPB + areaOfAPC + areaOfBPC)))
+			return true;
+		else
+			return false;
 	}
 
 	/*
@@ -135,5 +165,4 @@ public class Triangle implements Shape {
 	public void setOriginY(float originY) {
 		this.originY = originY;
 	}
-
 }
