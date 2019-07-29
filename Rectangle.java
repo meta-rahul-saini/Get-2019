@@ -56,16 +56,6 @@ public class Rectangle implements Shape {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see Shape#isPointEnclosed()
-	 */
-	@Override
-	public boolean isPointEnclosed() {
-		return false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see Shape#getShapeType()
 	 */
 	@Override
@@ -82,6 +72,17 @@ public class Rectangle implements Shape {
 		return date;
 	}
 
+	@Override
+	public boolean isPointEnclosed(float x, float y) {
+		if (x <= (this.originX + this.width)
+				&& (y <= (this.originY + this.height))) {
+			if ((x >= this.originX) && (y > this.originY)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -90,7 +91,8 @@ public class Rectangle implements Shape {
 	@Override
 	public float getOrigin() {
 
-		return (float) Math.sqrt((this.originX * this.originX + this.originY * this.originY));
+		return (float) Math.sqrt((this.originX * this.originX + this.originY
+				* this.originY));
 	}
 
 	/*
