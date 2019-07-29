@@ -39,6 +39,13 @@ public class RegularPolygon implements Shape {
 		return area;
 	}
 
+
+	@Override
+	public boolean isPointEnclosed(float x, float y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -50,16 +57,6 @@ public class RegularPolygon implements Shape {
 		float perimeter = (lengthOfSide * noOfSides);
 
 		return perimeter;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Shape#isPointEnclosed()
-	 */
-	@Override
-	public boolean isPointEnclosed() {
-		return false;
 	}
 
 	/*
