@@ -207,5 +207,21 @@ public class Screen {
 
 		return shapeList1;
 	}
+	
 
+	/**
+	 * function to return shapes enclosing a point
+	 * 
+	 * @return list of shapes is returned
+	 */
+	public List<Shape> getListOfShapesEnclosingAPoint(float x, float y) {
+
+		List<Shape> shapeList = new ArrayList<>();
+		for (Shape shape : shapeMap.values()) {
+			
+			if(shape.isPointEnclosed(x, y))
+				shapeList.add(shape);
+		}
+		return shapeList;
+	}
 }
