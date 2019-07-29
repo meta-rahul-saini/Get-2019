@@ -22,7 +22,7 @@ public interface Shape {
 	/**
 	 * this function calculates Perimeter of shape
 	 * 
-	 * @return perimeter in float
+	 * @return parameter in float
 	 */
 	public float getPerimeter();
 
@@ -31,7 +31,7 @@ public interface Shape {
 	 * 
 	 * @return true if shape is enclosed o/w false is returned
 	 */
-	public boolean isPointEnclosed();
+	public boolean isPointEnclosed(float x, float y);
 
 	/**
 	 * @return type of shape e.g. RECTANGLE, SQUARE etc.
