@@ -409,4 +409,73 @@ public class ScreenPositiveTest {
 		};
 		assertEquals(true, isSorted.check(computedShapesList));
 	}
+	
+	/**
+	 * this function tests getShapesEnclosingAPoint method of screen class
+	 */
+	@Test
+	public void getShapesEnclosingAPointTest() {
+		Screen screen = new Screen();
+		
+		Point point1 = new Point();
+		point1.setX(1);
+		point1.setY(1);
+
+		List<Integer> parameters1 = new ArrayList<>();
+		parameters1.add(4);
+
+		Point point2 = new Point();
+		point2.setX(1);
+		point2.setY(1);
+
+		List<Integer> parameters2 = new ArrayList<>();
+		parameters2.add(4);
+
+		Point point3 = new Point();
+		point3.setX(2);
+		point3.setY(2);
+
+		List<Integer> parameters3 = new ArrayList<>();
+		parameters3.add(4);
+		parameters3.add(5);
+		parameters3.add(6);
+		parameters3.add(7);
+
+		Point point4 = new Point();
+		point4.setX(2.5F);
+		point4.setY(2.5F);
+
+		List<Integer> parameters4 = new ArrayList<>();
+		parameters4.add(4);
+		parameters4.add(5);
+
+		Point point5 = new Point();
+		point5.setX(2);
+		point4.setY(2);
+
+		List<Integer> parameters5 = new ArrayList<>();
+		parameters5.add(3);
+		parameters5.add(4);
+		parameters5.add(5);
+
+		screen.addShape(Shape.ShapeType.CIRCLE, point1, parameters1);
+
+		screen.addShape(Shape.ShapeType.SQUARE, point2, parameters2);
+
+		screen.addShape(Shape.ShapeType.POLYGON, point3, parameters3);
+
+		screen.addShape(Shape.ShapeType.RECTANGLE, point4, parameters4);
+
+		screen.addShape(Shape.ShapeType.TRIANLGE, point5, parameters5);
+
+		List<Shape> computedShapesList = screen.getListOfShapesEnclosingAPoint(3, 3);
+		
+		for(Shape shape: computedShapesList)
+		{
+			System.out.println(shape.getShapeType() + " enclosing points are: " + shape.getOriginX()+ ", " + shape.getOriginY());
+		}
+		
+		if(computedShapesList.size() == 3)
+			assertEquals(true, true);
+	}
 }
