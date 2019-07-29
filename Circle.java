@@ -56,8 +56,13 @@ public class Circle implements Shape {
 	 * @see Shape#isPointEnclosed()
 	 */
 	@Override
-	public boolean isPointEnclosed() {
-		return false;
+	public boolean isPointEnclosed(float x, float y) {
+		float distanceFromCenter = (float) Math.sqrt((Math.pow((this.originX - x), 2)) + (Math.pow((this.originY - y), 2))); 
+		
+		if(distanceFromCenter < this.radius)
+			return true;
+		else
+			return false;
 	}
 
 	/*
