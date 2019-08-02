@@ -36,6 +36,6 @@ public class Program {
 	
 	public void setProgramCapacity(int capacity)
 	{
-		this.programCapacity = capacity - 1 ;
+		this.programCapacity = capacity ;
 	}
 }
