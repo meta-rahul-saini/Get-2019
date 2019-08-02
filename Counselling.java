@@ -75,9 +75,9 @@ public class Counselling
 	        	System.out.println(totalStudent);
 	            
 	        	// creating a student Queue
-	        	studentQueue = new StudentQueue(totalStudent-1);
+	        	studentQueue = new StudentQueue(totalStudent);
 	            
-	        	for (int currentStudentIndex = 1; currentStudentIndex < totalStudent; currentStudentIndex++)
+	        	for (int currentStudentIndex = 0; currentStudentIndex < totalStudent; currentStudentIndex++)
 	        	{
 	        		// getting current row content
 	        		row = sheet.getRow(currentStudentIndex);
@@ -97,7 +97,8 @@ public class Counselling
 					// initializing the list of program preferred by user
 					for(count = 0; count < 5; count++)
 					{
-						prefOrder[count] = Integer.parseInt(order[count]);
+						System.out.println(" pre order: " + order[count]);
+						prefOrder[count] = Integer.parseInt(order[count].trim());
 					}
 					//System.out.println(name);
 					studentObject = new Student(name,rank,prefOrder);
@@ -163,7 +164,7 @@ public class Counselling
          }
          progList = new Program[totalProgram];
          
-         for (int currentProgramIndex = 1; currentProgramIndex < totalProgram; currentProgramIndex++) 
+         for (int currentProgramIndex = 0; currentProgramIndex < totalProgram; currentProgramIndex++) 
          {
 				
         	 row = programSheet.getRow(currentProgramIndex);
@@ -174,7 +175,7 @@ public class Counselling
 				
 				capacity = Integer.parseInt(row[2].getContents());
 				
-				progList[currentProgramIndex - 1] = new Program(name,id,capacity);
+				progList[currentProgramIndex] = new Program(name,id,capacity);
 				
 			}
          return progList;
@@ -201,7 +202,7 @@ public class Counselling
 	        
 			WritableSheet excelSheet = this.counselResultWBook.createSheet("Sheet 1", 0);
 			
-	        int row = 1;
+	        int row = 0;
 	        Student student = null;
 	        int[] prefProgramList;
 	        int preferredProgramIndex;
@@ -212,36 +213,50 @@ public class Counselling
 	        Label pref = null;
 	        Number progIdNumeber;
 	        Number rank;
+
+        	int studentCount = 0;
 	        while(!studentQueue.isEmpty())
 	        {
-	            student = studentQueue.peep();
+	            // getting the student oject 
+	        	student = studentQueue.peep();
+	        	// taking the student preferred choices
 	            prefProgramList = student.prefrenceOrder();
+	            
+	            studentCount++;
 	            
 	            for(preferredProgramIndex = 0; preferredProgramIndex < 5; preferredProgramIndex++)
 	            {
-	            		 for (currentProgramIndex = 0; currentProgramIndex < totalProgram-1; currentProgramIndex++)
+	            		 for (currentProgramIndex = 0; currentProgramIndex < totalProgram; currentProgramIndex++)
 	            		 {
-	            			Program currentProgram = progList[currentProgramIndex];
-	            			
 	            			progId = progList[currentProgramIndex].getProgramId();
-	 	            	
+	            			
+	            			System.out.println(" student count: " + studentCount);
+	            			System.out.println(" pref program: "+ prefProgramList[preferredProgramIndex] + " program ID: " + progId );
 	            			if(prefProgramList[preferredProgramIndex] == progId)
 	            			{
 	 	            			if(progList[currentProgramIndex].isAvailable())
 	 	            			{
 	 	            				progList[currentProgramIndex].setProgramCapacity(progList[currentProgramIndex].getProgramCapacity() - 1);
+	 	            				System.out.println(" program " +currentProgramIndex + " capacity: " + (progList[currentProgramIndex].getProgramCapacity()) );
 	 	            				
 	 	            				student.setProgID(progId);
 	 	            				flag = true;
 	 	            			}
 	 	            		}
+	            			 if(flag == true)
+	 	            		{
+	 	 	            		break;
+	 	 	            	}
 	 	            	}
 	            		 if(flag == true)
-	            		{
-	 	            		break;
-	 	            	}
+	            		 {
+	            			 flag = false;
+	            			 break;
+	            		 }
 	            }
 	            
+	            // it takes argument column index, row, and data
+	            // adding name of the students in 1st column
 	            label = new Label(0, row, student.getName());
 	            
 	            try
@@ -252,7 +267,8 @@ public class Counselling
 	            {
 	                e.printStackTrace();
 	            }
-
+	            
+	           // adding the rank of the students in 2nd column
 	           rank = new Number(1, row, student.getRank());
 	            
 	            try{
@@ -262,12 +278,16 @@ public class Counselling
 	            {
 	                	 e.printStackTrace();
 	            }
+	            
+	            // adding the user preferred choices to the 3rd column 
 	            pref = new Label(2, row, Arrays.toString(student.prefrenceOrder()));
 	                 try{
 	                	 excelSheet.addCell(pref);
 	                 }catch(Exception e){
 	                	 e.printStackTrace();
 	                 }
+	            
+	            // adding the user allocated program id to the 4th column
 	            progIdNumeber = new Number(3, row, student.programId());
 	                 try{
 	                	 excelSheet.addCell(progIdNumeber);
@@ -304,9 +324,9 @@ public class Counselling
 	
 	 public static void main(String[]args)
 	 {
-		 String studentData = "C:\\Users\\Rahul\\Downloads\\studentData.xls",
-				 programList = "C:\\Users\\Rahul\\Downloads\\programList.xls",
-				 result = "C:\\Users\\Rahul\\Downloads\\counselResult.xls";
+		 String studentData = "D:\\studentData.xls",
+				 programList = "D:\\programList.xls",
+				 result = "D:\\counselResult.xls";
 		 
 		 
 		 Counselling counselling = new Counselling(studentData, programList, result);
