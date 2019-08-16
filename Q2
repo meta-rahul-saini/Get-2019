@@ -1,0 +1,72 @@
+#######################################
+# 2.1 Insert sample data in StoreFront tables by using SQL files.
+#####################################
+
+
+###########################################
+# 2.2 Display Id, Title, Category Title, Price of the products 
+# which are Active and recently added products should be at top.
+#############################################
+
+select product_id,  product_title, category.category_name from product inner join category 
+                    on product.category_id = category.category_id  where product.quantity > 0 order by product.added_time desc;
+
+#######################################
+# 2.3 Display the list of products which don't have any images.
+#######################################
+
+select distinct product_title from product p inner join
+                    image i on p.product_id = i.product_id;
+                    
+###################################
+# 2.4 Display all Id, Title and Parent Category Title for all the Categories listed, 
+# sorted by Parent Category Title and then Category Title. (If Category is top category 
+# then Parent Category Title column should display “Top Category” as value.)
+# Display Id, Title, Parent Category Title of all the leaf Categories (categories which are not 
+# parent of any other category)
+#####################################
+
+# temp view holds the intermediate and leaf category data
+drop view if exists temp;
+
+create view temp as 
+    select c1.category_id as category_id, c1.category_name as category_name, c2.category_name as parent_category 
+        from category c1 inner join category c2 on c1.parent_category_id = c2.category_id  
+            order by c1.parent_category_id, c2.category_id;
+
+
+select * from temp;
+
+
+#create parent_category table to hold the data for parent category data i.e. top level data
+
+drop table if exists parent_category;
+
+create table parent_category as select category_id, category_name from category where parent_category_id is null;
+
+alter table parent_category  add parent_category varchar(45) default "Top category";
+
+select * from parent_category;
+
+
+# union of above both type of data
+
+select * from temp union select * from parent_category;
+
+
+#####################################
+# 2.5 displays all the leaf categories
+###################################
+
+select * from category where category_id not in (select parent_category_id from category where parent_category_id is not null);
+
+#####################################
+# 2.6 displays info of all the product which falls under a particular category i.e. shoes here
+#####################################
+
+select product_title, unit_price, product_description from product where category_id = (select category_id from category where category_name = 'shoes');
+
+#######################################
+# 2.7 Display the list of Products whose Quantity on hand (Inventory) is under 50.
+########################################
+select * from product where quantity < 50;
