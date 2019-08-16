@@ -1,0 +1,294 @@
+
+######################################
+# 1.1 Create all tables of eCommerce Application: (Write all CREATE commands in a SQL file and run that SQL File).
+######################################
+
+drop database storefrontdb;
+
+create database storefrontdb;
+
+use storefrontdb;
+
+# creating a category table and inserting data in table
+drop table if exists category;
+
+CREATE  TABLE category (
+
+  category_id INT NOT NULL ,
+
+  category_name VARCHAR(45) NULL ,
+
+
+  PRIMARY KEY (category_id), 
+  
+  parent_category_id int default null,
+  
+  FOREIGN KEY (parent_category_id) REFERENCES category(category_id)
+);
+
+insert into category values(101, "footwear", null);
+insert into category values(102, "shoes", 101) ;
+insert into category values(103, "sandals", 101);
+insert into category values(104, "Heels", 101);
+insert into category values(105, "Slippers", 101);
+
+insert into category values(106, "clothings", null);
+insert into category values(107, "Men's casual shirt", 106);
+insert into category values(108, "Men's casual shirt1", 107);
+insert into category values(109, "Men's casual shirt2", 107);
+insert into category values(110, "Men's formal shirt", 106);
+
+select * from category;
+
+# creating a product table and inserting data in product table
+
+drop table if exists product;
+
+CREATE  TABLE `storefrontdb`.`product` (
+
+  `product_id` INT NOT NULL ,
+
+   added_time DATETIME not null,
+   
+  `product_description` VARCHAR(45) NULL ,
+ 
+  `product_title` VARCHAR(45) NULL ,
+
+  `quantity` INT NULL ,
+
+  `unit_price` FLOAT NULL ,
+
+  PRIMARY KEY (`product_id`),
+
+  category_id int not null,
+  
+  FOREIGN KEY (category_id) REFERENCES category(category_id)
+   
+  );
+
+insert into product values(201, now(), 'ADDIDAS sports shoe', 'addidas 201', 100, 4000, 102);
+insert into product values(202, '2015-11-05 14:29:36', 'NIKE sports shoe', 'NIKE 202', 15, 5000, 102);
+insert into product values(203, '2016-11-05 14:29:36', 'PUMA sports shoe', 'PUMA 203', 10, 3000, 102);
+insert into product values(204, '2014-11-05 14:29:36', 'Sparx Sports sandals', 'sparx sandals', 15, 1000, 103);
+insert into product values(205, '2017-11-05 14:29:36', 'PUMA sandals for casuals', 'sparx slippers', 51, 900, 103);
+insert into product values(206, '2013-11-05 14:29:36', 'Mens casual shirt', 'Casual Shirt', 40, 1000, 107);
+
+select * from product;
+
+# creating image table and inserting data into it
+
+drop table if exists image;
+
+CREATE  TABLE `storefrontdb`.`image` (
+
+  `image_id` INT NOT NULL ,
+
+  `image_title` VARCHAR(45) NULL ,
+
+  product_id int not null,
+  
+  FOREIGN KEY (product_id) REFERENCES product(product_id) on delete cascade on update cascade
+  );
+
+
+insert into image values(301, 'ADDIDAS sports shoe image1', 201);
+insert into image values(302, 'ADDIDAS sports shoe image2', 201);
+insert into image values(303, 'ADDIDAS sports shoe image3', 201);
+insert into image values(304, 'NIKE shoe image1', 202);
+insert into image values(305, 'NIKE shoe image2', 202);
+
+# creating address table and inserting data into it
+
+drop table if exists address;
+
+CREATE  TABLE `storefrontdb`.`address` (
+
+   address_id int not NULL,
+   
+   plot_no int not null,
+
+  `pincode` INT NOT NULL ,
+
+  `city` VARCHAR(45) NULL ,
+  
+  `state` VARCHAR(45) NULL ,
+  
+  `country` VARCHAR(45) NULL ,
+  
+  primary key(address_id)
+  
+);
+
+insert into address values(501, 18, 302012, 'jaipur', 'Rajasthan', 'India');
+insert into address values(502, 29, 302022, 'jodhpur', 'Rajasthan', 'India');
+insert into address values(503, 39, 303013, 'udaipur', 'Rajasthan', 'India');
+
+# creating order table and inserting data into it
+
+drop table if exists `storefrontdb`.`order`;
+
+
+CREATE  TABLE `storefrontdb`.`order` (
+
+   order_id int not NULL,
+
+   user_id INT NOT NULL ,
+
+  order_date DATETIME NOT NULL ,
+  
+  order_status VARCHAR(45) NULL ,
+  
+  order_amount float NOT NULL ,
+  
+  address_id int NOT NULL ,
+  
+  primary key(order_id),
+  
+  FOREIGN KEY (address_id) REFERENCES address(address_id),
+  
+  product_id int null,
+  
+  FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
+
+insert into `storefrontdb`.`order` values(401, 601, "2008-11-14", "dispatched", 2000, 501, 201);
+insert into `storefrontdb`.`order` values(402, 602, "2008-10-17", "shipped", 3000, 502, 202);
+insert into `storefrontdb`.`order` values(403, 603, "2008-11-18", "delivered", 3000, 503, 203);
+
+
+# creating user table and inserting data into it
+
+drop table if exists `storefrontdb`.`user`;
+
+CREATE  TABLE `storefrontdb`.`user` (
+
+  user_id int not NULL,
+   
+  primary key(user_id),
+  
+  user_name varchar(45) not null,
+  
+  phone_number BIGINT not null, 
+  
+  email_id varchar(45) not null,
+  
+  address_id int NULL,
+  
+  FOREIGN KEY (address_id) REFERENCES address(address_id),
+  
+  order_id int NULL,
+  
+  FOREIGN KEY (order_id) REFERENCES `storefrontdb`.`order`(order_id)  
+);
+
+insert into user values(601, 'rahul', 8005510834, 'rahul77349@gmail.com', 501, 401);
+
+insert into user values(602, 'rohit', 9000343434, 'rohit77349@gmail.com', 502, 402);
+
+insert into user values(603, 'raghu', 7005510834, 'raghu77349@gmail.com', 503, 403);
+
+# creating shopper table and inserting data into it
+
+drop table if exists `storefrontdb`.`shopper`;
+
+CREATE  TABLE `storefrontdb`.`shopper` (
+
+  shpper_id int not NULL,
+   
+  primary key(shpper_id),
+  
+  shopper_name varchar(45) not null,
+  
+  phone_number BIGINT not null, 
+  
+  email_id varchar(45) not null,
+  
+  address_id int NULL,
+  
+  FOREIGN KEY (address_id) REFERENCES address(address_id),
+  
+  order_id int NULL,
+  
+  FOREIGN KEY (order_id) REFERENCES `storefrontdb`.`order`(order_id)
+  
+);
+
+insert into shopper values(701, 'shopper', 9005510934, 'shopper77349@gmail.com', 501, 401);
+
+# creating administrator table and inserting data into it
+
+drop table if exists `storefrontdb`.`administrator`;
+
+CREATE  TABLE `storefrontdb`.`administrator` (
+
+  administrator_id int not NULL,
+   
+  primary key(administrator_id),
+  
+  administrator_name varchar(45) not null,
+  
+  phone_number BIGINT not null, 
+  
+  email_id varchar(45) not null,
+  
+  address_id int NULL,
+  
+  FOREIGN KEY (address_id) REFERENCES address(address_id),
+  
+  order_id int NULL,
+  
+  FOREIGN KEY (order_id) REFERENCES `storefrontdb`.`order`(order_id)
+  
+);
+
+insert into administrator values(801, 'admin', 8005510834, 'admin77349@gmail.com', 501, 401);
+
+########################
+# 1.2 command to show tables in storeFront
+########################
+show tables;
+
+########################
+# 1.3 command to remove product table of the storeFront
+########################
+
+select * from product;
+
+SET FOREIGN_KEY_CHECKS=0;
+
+drop table product;
+
+set FOREIGN_KEY_CHECKS=1;
+
+
+######################
+# 1.4 Create the Product table again.
+######################
+
+# creating a product table and inserting data in product table
+
+drop table if exists product;
+
+CREATE  TABLE `storefrontdb`.`product` (
+
+  `product_id` INT NOT NULL ,
+
+   added_time DATETIME not null,
+   
+  `product_description` VARCHAR(45) NULL ,
+ 
+  `product_title` VARCHAR(45) NULL ,
+
+  `quantity` INT NULL ,
+
+  `unit_price` FLOAT NULL ,
+
+  PRIMARY KEY (`product_id`),
+
+  category_id int not null,
+  
+  FOREIGN KEY (category_id) REFERENCES category(category_id)
+   
+  );
+  
