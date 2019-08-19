@@ -1,0 +1,5 @@
+
+select distinct product_title from product where product_id not in (
+select distinct p.product_id as product_id from product p inner join
+                    image i on p.product_id = i.product_id
+                    )
