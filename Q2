@@ -8,8 +8,8 @@
 # which are Active and recently added products should be at top.
 #############################################
 
-select product_id,  product_title, category.category_name from product inner join category 
-                    on product.category_id = category.category_id  where product.quantity > 0 order by product.added_time desc;
+select product_id,  product_title, category.category_name, unit_price from product inner join category 
+                    on product.category_id = category.category_id  where product.status = 0 order by product.added_time desc;
 
 #######################################
 # 2.3 Display the list of products which don't have any images.
