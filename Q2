@@ -15,8 +15,7 @@ select product_id,  product_title, category.category_name, unit_price from produ
 # 2.3 Display the list of products which don't have any images.
 #######################################
 
-select distinct product_title from product p inner join
-                    image i on p.product_id = i.product_id;
+select product_title from product where product_id not in ( select product_id from image);
                     
 ###################################
 # 2.4 Display all Id, Title and Parent Category Title for all the Categories listed, 
@@ -26,33 +25,27 @@ select distinct product_title from product p inner join
 # parent of any other category)
 #####################################
 
-# temp view holds the intermediate and leaf category data
-drop view if exists temp;
+# holds top category data
+create view top_level as select category_id, category_name, CASE 
+         WHEN parent_category_id IS NULL THEN 'Top Category' 
+         ELSE parent_category_id 
+       END AS parent_category_title from  category where parent_category_id is null;
 
-create view temp as 
-    select c1.category_id as category_id, c1.category_name as category_name, c2.category_name as parent_category 
-        from category c1 inner join category c2 on c1.parent_category_id = c2.category_id  
-            order by c1.parent_category_id, c2.category_id;
+# holds intermediate and leaf level data
 
+create view low_level as select * from category where category_id not in (select category_id from category where parent_category_id is null);
 
-select * from temp;
-
-
-#create parent_category table to hold the data for parent category data i.e. top level data
-
-drop table if exists parent_category;
-
-create table parent_category as select category_id, category_name from category where parent_category_id is null;
-
-alter table parent_category  add parent_category varchar(45) default "Top category";
-
-select * from parent_category;
-
-
-# union of above both type of data
-
-select * from temp union select * from parent_category;
-
+select 
+    low_level.category_id,
+    low_level.category_name,
+    category.category_name as parent_category_title
+from
+    low_level
+        inner join
+    category ON low_level.parent_category_id = category.category_id union select 
+    category_id, category_name, parent_category_title
+from
+    top_level order by parent_category_title, category_name;  # order by parent_category_title and then 
 
 #####################################
 # 2.5 displays all the leaf categories
@@ -69,4 +62,4 @@ select product_title, unit_price, product_description from product where categor
 #######################################
 # 2.7 Display the list of Products whose Quantity on hand (Inventory) is under 50.
 ########################################
-select * from product where quantity < 50;
+select product_title from product where quantity < 50;
