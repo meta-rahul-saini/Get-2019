@@ -16,16 +16,16 @@ select * from `storefrontdb`.`order` order by order_amount desc limit 10;
 # one or more items from those orders are still not shipped.
 #########################################
 
-SELECT * from `storefrontdb`.`order` where order_date < DATE_SUB("2008-12-12", INTERVAL 15 DAY) and order_status != "shipped";
+SELECT * from `storefrontdb`.`order` where order_date < DATE_SUB(now(), INTERVAL 10 DAY) and order_status != "shipped";
 
 ############################################
-## 3.4 Display list of shoppers which haven't ordered anything since last mont
-#############################################
+## 3.4 Display list of shoppers which haven't ordered anything since last month
+############################################
 
-select distinct u.user_name from `storefrontdb`.`order` as o inner join user u on o.user_id = u.user_id where order_date <= DATE_SUB("2008-12-12", INTERVAL 30 DAY) order by order_date;
+select distinct u.user_name from `storefrontdb`.`order` as o inner join user u on o.user_id = u.user_id where order_date <= DATE_SUB(now(), INTERVAL 30 DAY);
 
 ############################################
 ## 3.5 Display list of shopper along with orders placed by them in last 15 days.
 ############################################
 
-select u.user_name, o.order_id from `storefrontdb`.`order` as o inner join user u on o.user_id = u.user_id where order_date >= DATE_SUB("2008-12-01", INTERVAL 15 DAY);
+select u.user_name, o.order_id from `storefrontdb`.`order` as o inner join user u on o.user_id = u.user_id where order_date >= DATE_SUB(now(), INTERVAL 15 DAY);
