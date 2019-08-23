@@ -98,7 +98,8 @@ public class JDBC {
 		try {
 			// creating a prepared statement object
 			PreparedStatement ps = connection
-					.prepareStatement("INSERT INTO image VALUES ( ?, ?, ?)");
+					.prepareStatement();
+			
 			ps.execute("SET SQL_SAFE_UPDATES=0");
 			
 			// returns #rows updated
