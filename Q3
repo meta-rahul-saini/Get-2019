@@ -29,3 +29,32 @@ select distinct u.user_name from `storefrontdb`.`order` as o inner join user u o
 ############################################
 
 select u.user_name, o.order_id from `storefrontdb`.`order` as o inner join user u on o.user_id = u.user_id where order_date >= DATE_SUB(now(), INTERVAL 15 DAY);
+
+##################################
+## 3.6 Display list of order items which are in “shipped” state for particular Order Id (i.e.: 1020))
+##################################
+
+select 
+    product_id
+from
+    storefrontdb.order as o
+        inner join
+    products_in_order as p ON o.order_id = p.order_Id
+where
+    order_status = 'shipped' and p.order_id = 402;
+
+##################################
+## 3.7 Display list of order items along with order placed date which fall between Rs 20 to Rs 50 price.
+##################################
+
+select 
+    product_title, order_date
+from
+    storefrontdb.order as o
+        inner join
+    products_in_order as p ON o.order_id = p.order_id
+        inner join
+    product
+where
+    unit_price between 2000 and 6000;
+    
