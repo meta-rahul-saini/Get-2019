@@ -57,7 +57,8 @@ select * from category where category_id not in (select parent_category_id from 
 # 2.6 displays info of all the product which falls under a particular category i.e. shoes here
 #####################################
 
-select product_title, unit_price, product_description from product where category_id = (select category_id from category where category_name = 'shoes');
+select product_title, unit_price, product_description  from product inner join product_category on product.product_id = product_category.product_id 
+where category_id = (select category_id from category where category_name = 'shoes');
 
 #######################################
 # 2.7 Display the list of Products whose Quantity on hand (Inventory) is under 50.
