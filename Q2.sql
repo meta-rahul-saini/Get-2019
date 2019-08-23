@@ -4,10 +4,11 @@ Write SQL scripts for the following:
 2.1 Display the list of products (Id, Title, Count of Categories) which fall in more than one Categories.
 
 select 
-    product_id, product_title, count(*)
+    product_id
 from
-    product
-group by product_title;
+    product_category
+group by product_id
+having count(product_id) > 1;
 
 
 
@@ -39,9 +40,9 @@ WHERE
 2.3 Display the Categories along with number of products under each category.
 
 select 
-    category_name, count(product.category_id) as no_of_product
+    category_name, count(product_category.category_id)
 from
-    product
+    product_category
         inner join
-    category ON product.category_id = category.category_id
-group by product.category_id;
+    category ON product_category.category_id = category.category_id
+group by product_category.category_id;
