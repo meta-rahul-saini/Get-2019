@@ -2,7 +2,6 @@
 ######################################
 # 1.1 Create all tables of eCommerce Application: (Write all CREATE commands in a SQL file and run that SQL File).
 ######################################
-
 drop database storefrontdb;
 
 create database storefrontdb;
@@ -12,18 +11,13 @@ use storefrontdb;
 # creating a category table and inserting data in table
 drop table if exists category;
 
-CREATE  TABLE category (
-
-  category_id INT NOT NULL ,
-
-  category_name VARCHAR(45) NULL ,
-
-
-  PRIMARY KEY (category_id), 
-  
-  parent_category_id int default null,
-  
-  FOREIGN KEY (parent_category_id) REFERENCES category(category_id)
+CREATE TABLE category(
+    category_id INT NOT NULL,
+    category_name VARCHAR(45) NULL,
+    PRIMARY KEY (category_id),
+    parent_category_id int default null,
+    FOREIGN KEY (parent_category_id)
+        REFERENCES category (category_id)
 );
 
 insert into category values(101, "footwear", null);
@@ -37,58 +31,93 @@ insert into category values(107, "Men's casual shirt", 106);
 insert into category values(108, "Men's casual shirt1", 107);
 insert into category values(109, "Men's casual shirt2", 107);
 insert into category values(110, "Men's formal shirt", 106);
+insert into category values(111, "Accessories", null);
+insert into category values(112, "Watch", 111);
 
-select * from category;
+select 
+    *
+from
+    category;
 
 # creating a product table and inserting data in product table
 
 drop table if exists product;
 
-CREATE  TABLE `storefrontdb`.`product` (
+CREATE TABLE storefrontdb.product(
+    product_id INT NOT NULL,
+    status int not null default 1,
+    added_time DATETIME not null,
+    product_description VARCHAR(45) NULL,
+    product_title VARCHAR(45) NULL,
+    quantity INT NULL,
+    unit_price FLOAT NULL,
+    PRIMARY KEY (product_id)
+    
+);
 
-  `product_id` INT NOT NULL ,
 
-   added_time DATETIME not null,
-   
-  `product_description` VARCHAR(45) NULL ,
- 
-  `product_title` VARCHAR(45) NULL ,
+CREATE INDEX by_product_id ON product (product_id);
+CREATE INDEX by_added_time ON product (added_time);
 
-  `quantity` INT NULL ,
 
-  `unit_price` FLOAT NULL ,
 
-  PRIMARY KEY (`product_id`),
 
-  category_id int not null,
-  
-  FOREIGN KEY (category_id) REFERENCES category(category_id)
-   
-  );
+insert into storefrontdb.product values(201, 1, now(), 'ADDIDAS sports shoe', 'addidas 201', 100, 4000);
+insert into `storefrontdb`.`product` values(202, 1, '2019-8-25 14:29:36', 'NIKE sports shoe', 'NIKE 202', 15, 5000);
+insert into `storefrontdb`.`product` values(203, 1, '2018-8-15 14:29:36', 'PUMA sports shoe1', 'PUMA 203', 10, 3000);
+insert into `storefrontdb`.`product` values(204, 0, '2017-8-05 14:29:36', 'PUMA sports shoe2', 'PUMA 101', 10, 3000);
+insert into `storefrontdb`.`product` values(205, 1, '2016-7-05 14:29:36', 'Sparx Sports sandals', 'sparx sandals', 15, 1000);
+insert into `storefrontdb`.`product` values(206, 1, '2015-6-05 14:29:36', 'PUMA sandals for casuals', 'sparx slippers', 51, 900);
+insert into `storefrontdb`.`product` values(207, 1, '2014-6-05 14:29:36', 'Mens casual shirt', 'Casual Shirt1', 40, 1000);
+insert into `storefrontdb`.`product` values(208, 0, '2019-4-05 14:29:36', 'Mens casual shirt', 'Casual Shirt2', 40, 1000);
+insert into `storefrontdb`.`product` values(209, 1, '2018-3-05 14:29:36', 'SONATA watch 101', 'water proof digital watch', 40, 90);
 
-insert into product values(201, now(), 'ADDIDAS sports shoe', 'addidas 201', 100, 4000, 102);
-insert into product values(202, '2015-11-05 14:29:36', 'NIKE sports shoe', 'NIKE 202', 15, 5000, 102);
-insert into product values(203, '2016-11-05 14:29:36', 'PUMA sports shoe', 'PUMA 203', 10, 3000, 102);
-insert into product values(204, '2014-11-05 14:29:36', 'Sparx Sports sandals', 'sparx sandals', 15, 1000, 103);
-insert into product values(205, '2017-11-05 14:29:36', 'PUMA sandals for casuals', 'sparx slippers', 51, 900, 103);
-insert into product values(206, '2013-11-05 14:29:36', 'Mens casual shirt', 'Casual Shirt', 40, 1000, 107);
+select 
+    *
+from
+    storefrontdb.product;
+    
+    
 
-select * from product;
+# creating a product_category table and inserting data in product_category table
+
+drop table if exists product_category;
+
+CREATE TABLE product_category(
+    product_id INT NOT NULL,
+    category_id int not null,
+    PRIMARY KEY (product_id, category_id),
+    
+    FOREIGN KEY (category_id)
+        REFERENCES category (category_id)
+);
+
+insert into product_category values(201, 102);
+insert into product_category values(201, 103);
+insert into product_category values(202, 102);
+insert into product_category values(203, 102);
+insert into product_category values(204, 102);
+insert into product_category values(205, 103);
+insert into product_category values(206, 103);
+insert into product_category values(207, 108);
+insert into product_category values(208, 109);
+insert into product_category values(209, 112);
+
+
 
 # creating image table and inserting data into it
 
 drop table if exists image;
 
-CREATE  TABLE `storefrontdb`.`image` (
-
-  `image_id` INT NOT NULL ,
-
-  `image_title` VARCHAR(45) NULL ,
-
-  product_id int not null,
-  
-  FOREIGN KEY (product_id) REFERENCES product(product_id) on delete cascade on update cascade
-  );
+CREATE TABLE storefrontdb.image(
+    image_id INT NOT NULL,
+    primary key (image_id),
+    image_title VARCHAR(45) NULL,
+    product_id int not null,
+    FOREIGN KEY (product_id)
+        REFERENCES product (product_id)
+        on delete cascade on update cascade
+);
 
 
 insert into image values(301, 'ADDIDAS sports shoe image1', 201);
@@ -97,121 +126,116 @@ insert into image values(303, 'ADDIDAS sports shoe image3', 201);
 insert into image values(304, 'NIKE shoe image1', 202);
 insert into image values(305, 'NIKE shoe image2', 202);
 
+select 
+    *
+from
+    image;
 # creating address table and inserting data into it
 
 drop table if exists address;
 
-CREATE  TABLE `storefrontdb`.`address` (
-
-   address_id int not NULL,
-   
-   plot_no int not null,
-
-  `pincode` INT NOT NULL ,
-
-  `city` VARCHAR(45) NULL ,
-  
-  `state` VARCHAR(45) NULL ,
-  
-  `country` VARCHAR(45) NULL ,
-  
-  primary key(address_id)
-  
+CREATE TABLE storefrontdb.address(
+    address_id int not NULL,
+    plot_no int not null,
+    pincode INT NOT NULL,
+    city VARCHAR(45) NULL,
+    state VARCHAR(45) NULL,
+    country VARCHAR(45) NULL,
+    primary key (address_id)
 );
 
 insert into address values(501, 18, 302012, 'jaipur', 'Rajasthan', 'India');
 insert into address values(502, 29, 302022, 'jodhpur', 'Rajasthan', 'India');
 insert into address values(503, 39, 303013, 'udaipur', 'Rajasthan', 'India');
+insert into address values(504, 19, 303013, 'kota', 'Rajasthan', 'India');
 
 # creating order table and inserting data into it
 
-drop table if exists `storefrontdb`.`order`;
+drop table if exists storefrontdb.order;
 
 
-CREATE  TABLE `storefrontdb`.`order` (
-
-   order_id int not NULL,
-
-   user_id INT NOT NULL ,
-
-  order_date DATETIME NOT NULL ,
-  
-  order_status VARCHAR(45) NULL ,
-  
-  order_amount float NOT NULL ,
-  
-  address_id int NOT NULL ,
-  
-  primary key(order_id),
-  
-  FOREIGN KEY (address_id) REFERENCES address(address_id),
-  
-  product_id int null,
-  
-  FOREIGN KEY (product_id) REFERENCES product(product_id)
+CREATE TABLE storefrontdb.order(
+    order_id int not NULL,
+    user_id INT NOT NULL,
+    order_date DATETIME NOT NULL,
+    order_status VARCHAR(45) NULL,
+    order_amount float NOT NULL,
+    address_id int NOT NULL,
+    primary key (order_id),
+    FOREIGN KEY (address_id)
+        REFERENCES address (address_id)
+        on delete cascade on update cascade
+        
 );
 
 
-insert into `storefrontdb`.`order` values(401, 601, "2008-11-14", "dispatched", 2000, 501, 201);
-insert into `storefrontdb`.`order` values(402, 602, "2008-10-17", "shipped", 3000, 502, 202);
-insert into `storefrontdb`.`order` values(403, 603, "2008-11-18", "delivered", 3000, 503, 203);
+insert into storefrontdb.order values(401, 601, now(), "dispatched", 2000, 501);
+insert into storefrontdb.order values(402, 602, '2019-8-25 14:29:36', "shipped", 3000, 502);
+insert into storefrontdb.order values(403, 603, '2019-4-15 14:29:36', "delivered", 3000, 503);
+insert into storefrontdb.order values(404, 603, '2019-7-05 14:29:36', "cancelled", 4000, 503);
+insert into storefrontdb.order values(405, 603, '2019-7-06 14:29:36', "shipped", 4000, 503);
+insert into storefrontdb.order values(406, 603, '2019-7-04 14:29:36', "shipped", 5000, 503);
+insert into storefrontdb.order values(407, 604, '2019-3-05 14:29:36', "shipped", 5000, 504);
+
+
+drop table if exists product_in_order;
+
+CREATE TABLE products_in_order(
+    order_id int not NULL,
+    product_id INT NOT NULL
+    );
+
+insert into products_in_order values(401, 201);
+insert into products_in_order values(401, 202);
+insert into products_in_order values(401, 203);
+insert into products_in_order values(402, 203);
+insert into products_in_order values(402, 204);
+insert into products_in_order values(403, 203);
+insert into products_in_order values(404, 204);
+insert into products_in_order values(405, 203);
+insert into products_in_order values(406, 202);
+insert into products_in_order values(407, 204);
 
 
 # creating user table and inserting data into it
 
 drop table if exists `storefrontdb`.`user`;
 
-CREATE  TABLE `storefrontdb`.`user` (
-
-  user_id int not NULL,
-   
-  primary key(user_id),
-  
-  user_name varchar(45) not null,
-  
-  phone_number BIGINT not null, 
-  
-  email_id varchar(45) not null,
-  
-  address_id int NULL,
-  
-  FOREIGN KEY (address_id) REFERENCES address(address_id),
-  
-  order_id int NULL,
-  
-  FOREIGN KEY (order_id) REFERENCES `storefrontdb`.`order`(order_id)  
+CREATE TABLE storefrontdb.user(
+    user_id int not NULL,
+    primary key (user_id),
+    user_name varchar(45) not null,
+    phone_number BIGINT not null,
+    email_id varchar(45) not null,
+    address_id int NULL,
+    FOREIGN KEY (address_id)
+        REFERENCES address (address_id)
+        on delete cascade on update cascade
 );
 
-insert into user values(601, 'rahul', 8005510834, 'rahul77349@gmail.com', 501, 401);
+insert into user values(601, 'rahul', 8005510834, 'rahul77349@gmail.com', 501);
 
-insert into user values(602, 'rohit', 9000343434, 'rohit77349@gmail.com', 502, 402);
+insert into user values(602, 'rohit', 9000343434, 'rohit77349@gmail.com', 502);
 
-insert into user values(603, 'raghu', 7005510834, 'raghu77349@gmail.com', 503, 403);
+insert into user values(603, 'raghu', 7005510834, 'raghu77349@gmail.com', 503);
 
 # creating shopper table and inserting data into it
 
-drop table if exists `storefrontdb`.`shopper`;
+drop table if exists storefrontdb.shopper;
 
-CREATE  TABLE `storefrontdb`.`shopper` (
-
-  shpper_id int not NULL,
-   
-  primary key(shpper_id),
-  
-  shopper_name varchar(45) not null,
-  
-  phone_number BIGINT not null, 
-  
-  email_id varchar(45) not null,
-  
-  address_id int NULL,
-  
-  FOREIGN KEY (address_id) REFERENCES address(address_id),
-  
-  order_id int NULL,
-  
-  FOREIGN KEY (order_id) REFERENCES `storefrontdb`.`order`(order_id)
-  
+CREATE TABLE storefrontdb.shopper(
+    shpper_id int not NULL,
+    primary key (shpper_id),
+    shopper_name varchar(45) not null,
+    phone_number BIGINT not null,
+    email_id varchar(45) not null,
+    address_id int NULL,
+    FOREIGN KEY (address_id)
+        REFERENCES address (address_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    order_id int NULL,
+    FOREIGN KEY (order_id)
+        REFERENCES storefrontdb.order (order_id)
 );
 
 insert into shopper values(701, 'shopper', 9005510934, 'shopper77349@gmail.com', 501, 401);
@@ -220,75 +244,47 @@ insert into shopper values(701, 'shopper', 9005510934, 'shopper77349@gmail.com',
 
 drop table if exists `storefrontdb`.`administrator`;
 
-CREATE  TABLE `storefrontdb`.`administrator` (
-
-  administrator_id int not NULL,
-   
-  primary key(administrator_id),
-  
-  administrator_name varchar(45) not null,
-  
-  phone_number BIGINT not null, 
-  
-  email_id varchar(45) not null,
-  
-  address_id int NULL,
-  
-  FOREIGN KEY (address_id) REFERENCES address(address_id),
-  
-  order_id int NULL,
-  
-  FOREIGN KEY (order_id) REFERENCES `storefrontdb`.`order`(order_id)
-  
+CREATE TABLE storefrontdb.administrator(
+    administrator_id int not NULL,
+    primary key (administrator_id),
+    administrator_name varchar(45) not null,
+    phone_number BIGINT not null,
+    email_id varchar(45) not null,
+    address_id int NULL,
+    FOREIGN KEY (address_id)
+        REFERENCES address (address_id)
+        on delete cascade on update cascade,
+    order_id int NULL,
+    FOREIGN KEY (order_id)
+        REFERENCES storefrontdb.order (order_id)
+        on delete cascade on update cascade
 );
 
 insert into administrator values(801, 'admin', 8005510834, 'admin77349@gmail.com', 501, 401);
 
-########################
-# 1.2 command to show tables in storeFront
-########################
-show tables;
 
-########################
-# 1.3 command to remove product table of the storeFront
-########################
+drop table if exists item_order;
+create table item_order(
+    product_id int not null,
+    order_id int not null,
+    quantity int not null
+); 
 
-select * from product;
+insert into item_order values(201, 401, 2);
+insert into item_order values(202, 402, 4);
+insert into item_order values(203, 403, 2);
+insert into item_order values(204, 404, 3);
+insert into item_order values(203, 405, 1);
+insert into item_order values(202, 406, 2);
+insert into item_order values(204, 407, 1);
 
-SET FOREIGN_KEY_CHECKS=0;
-
-drop table product;
-
-set FOREIGN_KEY_CHECKS=1;
 
 
-######################
-# 1.4 Create the Product table again.
-######################
+select * from item_order;
 
-# creating a product table and inserting data in product table
+select 
+    *
+from
+    storefrontdb.order;
+    
 
-drop table if exists product;
-
-CREATE  TABLE `storefrontdb`.`product` (
-
-  `product_id` INT NOT NULL ,
-
-   added_time DATETIME not null,
-   
-  `product_description` VARCHAR(45) NULL ,
- 
-  `product_title` VARCHAR(45) NULL ,
-
-  `quantity` INT NULL ,
-
-  `unit_price` FLOAT NULL ,
-
-  PRIMARY KEY (`product_id`),
-
-  category_id int not null,
-  
-  FOREIGN KEY (category_id) REFERENCES category(category_id)
-   
-  );
-  
