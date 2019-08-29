@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+    function submitOnEnter(inputElement, event) {
+        if (event.keyCode == 13) { // No need to do browser specific checks. It is always 13.
+            inputElement.form.submit();
+        }
+    }
+    
+    function submitOnEnter1(inputElement,event) {
+    	inputElement.value = this.value;
+        if (event.keyCode == 13) { // No need to do browser specific checks. It is always 13.
+            inputElement.form.submit();
+        }
+    }
+</script>
+
+</head>
+<body align="center">
+
+<form action="SearchByNameServlet" method="get">
+    <input type="text" name="searchTerm" placeholder="Search Student..." onkeypress="submitOnEnter(this, event);" />
+</form>
+<br><br>
+
+<form action="FilterDataByClassServlet" method="get">
+Filter By Class: <select name="class" onchange="this.form.submit()">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</select>
+</form>
+</body>
+</html>
