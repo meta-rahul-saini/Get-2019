@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <script src="main.js"></script>
+</head>
+<body>
+
+<div align = center id="empDetail">
+            <h1>Register Employee</h1> <h1><a href="login.html"> Login! </a> </h1><hr><br><br>
+            <form action="RegisterEmployeeServlet" method="post">
+                    Full name:
+                    <input type="text" id="fullName" name = "fullName" minlength="2" onchange="validateName()" required><br><br>
+
+                    Gender:
+                    <input type="radio" id="gender" name="gender" value="male" checked> Male
+                    <input type="radio" id="gender" name="gender" value="female"> Female
+                    <input type="radio" id="gender" name="gender" value="other"> Other<br><br>
+
+                    Email Id:
+                    <input type="email" id="email" name="email" placeholder="abc@gmail.com"  onchange="validateEmail()" required>
+                    <br><br>
+
+                    Password:
+                    <input type="password" id="password" name="password" onchange="validatePassword()" required><br><br>
+
+                    Confirm Password:
+                    <input type="password" id="confirmPassword" name="confirmPassword" onchange="isPassEqual()" required><br><br>
+
+                    Contact Number:
+                    <input type="text" id="contact" name="contact"  onchange="validateContact()" required><br><br>
+
+					Organization Name: 
+					<select name="organizationName">
+ 						 <option value="Oracle">Oracle</option>
+  						 <option value="Github">Github</option>
+  						 <option value="Metacube">Metacube</option>
+  						 <option value="Coursera">Coursera</option>
+					</select>
+
+                    <input type="submit"/>
+
+                    <input type="reset">
+            </form>
+</div>
+        
+</body>
+</html>
