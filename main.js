@@ -1,10 +1,13 @@
   
   // function to validate employee name 
-  function validateName()
+  
+  var price = 0;
+  
+ function validateName()
   {
-    var nameFormat = /^[a-zA-Z ]*$/;
+    var nameFormat = /^[a-zA-Z ]+$/;
     var name = document.getElementById("fullName").value;
-    const min = 2;
+	const min = 2;
     console.log('dddddddd');
     if((name.match(nameFormat))){
       return true;
@@ -104,10 +107,11 @@ function validateEmail()
   {
     if( validateEmail() && validateName() && validatePassword() && isPassEqual() )
     {
-        document.getElementById("empDetail").style.display = "none";
-    document.getElementById("empDetail").innerHTML = "You have successfully registered! your reg. ID is : 1217"; 
+    document.getElementById("empDetail").style.display = "none";
+    
+    document.getElementById("regId").innerHTML = "You have successfully registered! your reg. ID is : 1217"; 
     document.getElementById("vehicleForm").style.display = "block";
-    }  
+	}  
 }
   
   
@@ -143,11 +147,9 @@ function validateEmail()
         document.getElementById("monthlyPrice").innerHTML = exchangeFromRupee * 500;
         document.getElementById("yearlyPrice").innerHTML = exchangeFromRupee * 3500;
       }
-      document.getElementById("rateTable").style.display = "block";
+     
   } 
   
-  
-
   // display the price
   function displayRate()
   {
@@ -159,18 +161,24 @@ function validateEmail()
     if(vehicleName != "" && vehicleType != "select type" && vehicleNumber != "" && employeeId != ""){
       document.getElementById("vehicleForm").style.display = "none";
       document.getElementById("rateInfo").style.display = "block";
-    }
+
+	  }
+	  
+	  rateCard();
   }
 
   // generate a price message for selected of selected plan
   function priceList(duration)
   {
+	  console.log(duration);
     var price = document.getElementById(duration).innerHTML;
+	console.log(price);
     document.getElementById("passID").innerHTML = "Pass price of your selected plan is" + price;
    }
    
    // function to generate pass for selected plan
    function generatePass()
-   {
+   {   document.getElementById("rateInfo").style.display = "none";
+
      document.getElementById("passID").style.display = "block";
    }
