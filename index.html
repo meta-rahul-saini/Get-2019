@@ -1,0 +1,112 @@
+<html>
+    <head>
+        
+    </head>
+    <body >
+        <div id = "NavBar"  >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href = "#EmployeeForm">Employee Form</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href = "#VehicleForm">Vehicle Form</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href = "#FeedbackForm">Feedback Form</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href = "#PlanForm">Plan Form</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div align = "center" id = "Heading">
+            <h1>Metacube Parking Portal</h1><br/>
+            <img src="parking.jpg" width="100%">
+        </div>    
+           
+        <div id = "EmployeeForm" align = "center" >
+                
+                <h2>Employee Registration Form</h2>
+                <form  method = "POST" >
+                    <div id = "Form">
+                        <b>Input Name : *</b></br><br/>
+                        <label for = "FirstName">First Name : *</label>
+                        <input type = "text" placeholder = "First Name" id = "FirstName" pattern = "[a-zA-Z]+" required><br/><br/>
+                        <label for = "LastName">Last Name : *</label>
+                        <input type = "text" placeholder = "Last Name" id = "LastName" pattern = "[a-zA-Z]+" required><br/><br/>
+                        <b>Select Gender : *</b><br/><br/>
+                        <div id = "Gender">
+                        <input type = "radio" name = "Gender" id = "Male" value = "Male"> <label for = "Male">Male</label>
+                        <input type = "radio" name = "Gender" id = "Female" value = "Female"><label for = "Female">Female</label><br/><br/>
+                        <label for = "ContactNumber">Contact Number : *</label>
+                        <input type = "text" name = "number" id = "ContactNumber" placeholder = "Contact Number" pattern = "[0-9]+" minlength="8" maxlength="10" required><br/><br/>
+                        <b> Enter Email Id : *</b><br/><br/>
+                        <label for = "EmailId">Email id : *</label>
+                        <input type = "email" name = "email" id = "EmailId" placeholder = "Email Id" required><br/><br/>
+                        <b> Enter Password : *</b><br/><br/>
+                        <label for = "Password">Password : *</label>
+                        <input type = "password" name = "password" id = "Password" placeholder = "Password" required><br/><br/>
+                        <label for = "ConfirmPassword">Confirm Password : *</label>
+                        <input type = "password" name = "password" id = "ConfirmPassword" placeholder = "Confirm Password" required><br/><br/>
+                        <input type = "submit" value = "Submit Employee Details"></br></br></br></br>
+                    </div>
+                </form>
+            </div>
+            <div id = "VehicleForm" align = "center">
+                <h2>Vehicle Details Form</h2>
+                <form method = "post" >
+                    <b>Input your Vehicle Details</b><br/><br/>
+                    <div id = "Form">
+                        <label for = "VehicleName">Vehicle Name : *</label>
+                        <input type = "text" placeholder = "Vehicle Name" id = "VehicleName" required><br/><br/>
+                        Vehicle Type *
+                        <select id = "VehicleType">
+                            <option value="Bicycle">Bicycle</option>
+                            <option value="Two Wheeler">Two Wheeler</option>
+                            <option value="Four Wheeler">Four Wheeler</option>
+                        </select><br/><br/>
+                        <label for = "VehicleNumber">Vehicle Number : *</label>
+                        <input type = "text" placeholder = "Vehicle Number" id = "VehicleNumber" required><br/><br/>
+                        <label for = "VehicleDetails">Vehicle Details : </label><br/><br/>
+                        <textarea rows="10" cols="50" id = "VehicleDetails" placeholder = "Input Vehicle Details Here"  required></textarea><br/><br/>
+                        <input type = "submit" value = "Submit Vehicle Details"></br></br></br></br>
+                    </div>    
+                </form>
+            </div>
+            <div id = "FeedbackForm" align = "center">
+                    <h2>Feedback Form</h2>
+                    <form method = "post" >
+                        <div id = "Form">
+                            <label for = "EmployeeId">Employee Id : *</label>
+                            <input type = "text" placeholder = "Vehicle Name" id = "VehicleName" required><br/><br/>
+                            <label for = "Subject">Subject : *</label>
+                            <input type = "text" placeholder = "Subject" id = "Subject" required><br/><br/>
+                            <label for = "Message">Message : *</label><br/><br/>
+                            <textarea rows="10" cols="50" id = "Message" placeholder = "Input Message Here"  required></textarea><br/><br/>
+                            <input type = "submit" value = "Submit Feedback"></br></br></br></br>
+                        </div>    
+                    </form>
+            </div>
+            <div id = "PlanForm" align = "center">
+                <h2>Vehicle Plan Form</h2>
+                <form method = "post" >
+                    <div id = "Form" align = "center">
+                            <b>Select Any One Plan : *</b><br/><br/>
+                        <div id ="Bicycle">
+                            <b>Bicycle Plans :</b><br/>
+                            <input type = "radio" name = "Plan" id = "BicyclePlan1" value = "BicyclePlan1"> <label for = "BicyclePlan1">Daily Plan Rs. 5 per Day</label><br/>
+                            <input type = "radio" name = "Plan" id = "BicyclePlan2" value = "BicyclePlan2"> <label for = "BicyclePlan2">Weekly Plan Rs. 100 per Week</label><br/>
+                            <input type = "radio" name = "Plan" id = "BicyclePlan3" value = "BicyclePlan3"> <label for = "BicyclePlan3">Monthly Plan Rs. 500 per Month</label><br/><br/>
+                        </div>
+                        <div id ="Bicycle">
+                            <b>Two Wheeler Plans :</b><br/>
+                            <input type = "radio" name = "Plan" id = "TwoWheeler1" value = "TwoWheeler1"> <label for = "TwoWheeler1">Daily Plan Rs. 10 per Day</label><br/>
+                            <input type = "radio" name = "Plan" id = "TwoWheeler2" value = "TwoWheeler2"> <label for = "TwoWheeler2">Weekly Plan Rs. 200 per Week</label><br/>
+                            <input type = "radio" name = "Plan" id = "TwoWheeler3" value = "TwoWheeler3"> <label for = "TwoWheeler3">Monthly Plan Rs. 1000 per Month</label><br/><br/>
+                        </div>
+                        <div id ="Bicycle"></div>
+                            <b>Four Wheeler Plans :</b><br/>
+                            <input type = "radio" name = "Plan" id = "FourWheeler1" value = "FourWheeler1"> <label for = "FourWheeler1">Daily Plan Rs. 20 per Day</label><br/>
+                            <input type = "radio" name = "Plan" id = "FourWheeler2" value = "FourWheeler2"> <label for = "FourWheeler2">Weekly Plan Rs. 400 per Week</label><br/>
+                            <input type = "radio" name = "Plan" id = "FourWheeler3" value = "FourWheeler3"> <label for = "FourWheeler3">Monthly Plan Rs. 2000 per Month</label><br/><br/>
+                        </div>
+                        <input type = "submit" value = "Select Plan"></br></br></br></br>
+                    </div>
+                </form>
+            </div>
+            <div align = "center" id = "FooterImage">
+                    <h1>Metacube Parking Portal</h1><br/>
+            </div>  
+    </body>
+</html>
