@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib  uri="http://www.springframework.org/tags/form" prefix="form" %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,78 +14,70 @@
 </head>
 <body>
 
-	<!-- 	 nav bar -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	<ul class="navbar-nav">
 		<li class="nav-item active"><a class="nav-link" href="/home">Home</a>
 		</li>
-		<li class="nav-item"><a class="nav-link" href="addStudent">add
+		<li class="nav-item"><a class="nav-link" href="signUp">add
 				Student</a></li>
 
-		<li class="nav-item"><a class="nav-link" href="showAllStudent">show
+		<li class="nav-item"><a class="nav-link" href="showStudent">show
+				Student</a></li>
+
+		<li class="nav-item"><a class="nav-link" href="searchStudent">Search
 				Student</a></li>
 	</ul>
 	</nav>
-	<br>
-	<br>
-
 	<div class="container">
-		<div class="jumbotron text-center bg-warning text-white">
-			<h1>Add Student Form</h1>
-			<p>${success}</p>
+		<div >
+		<h4 style="color: red">${success }</h4>
+			<h1>Add Student Operation Page</h1>
+				
 		</div>
 	</div>
-
-
 	<div class="container ">
 		<h2>Insert Data</h2>
-		<form:form modelAttribute="student" method="post">
+		<form:form modelAttribute="studentCommand">
 			<form:errors path="${Email}" cssClass="error text-warning" />
 			<div class="form-group">
-				<form:label path="firstName">First Name:</form:label>
-				<form:input path="firstName" cssClass="form-control" id="firstName"
-					placeholder="Enter Student frist Name" />
-				<form:errors cssClass="error text-warning" path="firstName" />
+				<form:label path="firstName">First Name:</form:label> 
+				<form:input path="firstName" cssClass="form-control" id="firstName" placeholder="Enter Student frist Name" />
+				<form:errors cssClass="error text-warning" path="firstName"/> 
 			</div>
-
+			
 			<div class="form-group">
-				<form:label path="lastName">Last Name:</form:label>
-				<form:input path="lastName" cssClass="form-control" id="lastName"
-					placeholder="Enter Student Last Name" />
-				<form:errors cssClass="error text-warning" path="lastName" />
+				<form:label path="lastName">Last Name:</form:label> 
+				<form:input path="lastName" cssClass="form-control" id="lastName" placeholder="Enter Student Last Name" />
+				<form:errors cssClass="error text-warning" path="lastName"/>
 			</div>
-
-
+			
+				
 			<div class="form-group">
-				<form:label path="fatherName">Father Name:</form:label>
-				<form:input path="fatherName" cssClass="form-control"
-					id="fatherName" placeholder="Enter Father  Name" />
-				<form:errors cssClass="error text-warning" path="fatherName" />
+				<form:label path="fatherName">Father Name:</form:label> 
+				<form:input path="fatherName" cssClass="form-control" id="fatherName" placeholder="Enter Father  Name" />
+				<form:errors cssClass="error text-warning" path="fatherName"/>
 			</div>
-
+		
 			<div class="form-group">
-				<form:label path="email">Email:</form:label>
-				<form:input path="email" cssClass="form-control" id="Email"
-					placeholder="Enter Email" />
-				<form:errors cssClass="error text-warning" path="email" />
+				<form:label path="email">Email:</form:label> 
+				<form:input path="email" cssClass="form-control" id="Email" placeholder="Enter Email" />
+				<form:errors cssClass="error text-warning" path="email"/>
 			</div>
 
 			<div class="form-group">
 				<form:label path="studentClass">Class:</form:label>
-				<form:input path="studentClass" class="form-control" id="class"
-					max="12" min="1" placeholder="Enter your class" />
-				<form:errors cssClass="error text-warning" path="studentClass" />
+				<form:input path="studentClass" class="form-control" id="class" max="12" min="1" placeholder="Enter your class"  />
+				<form:errors cssClass="error text-warning" path="studentClass"/> 
 			</div>
-
+			
 			<div class="form-group">
-				<form:label path="age">Age:</form:label>
-				<form:input path="age" class="form-control" id="class" max="12"
-					min="1" placeholder="Enter your class" />
-				<form:errors cssClass="error text-warning" path="age" />
+				<form:label path="studentAge">Age:</form:label>
+				<form:input path="studentAge" class="form-control" id="class" max="12" min="1" placeholder="Enter your class"  />
+				<form:errors cssClass="error text-warning" path="studentAge"/> 
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-			<a href="/home" class="btn btn-primary btn-sm text-center">Return
-				To Home Page</a>
+			<button type="submit" class="btn btn-primary">Submit</button> 
+			
+			<button type="reset" class="btn btn-danger">Reset</button> 
 		</form:form>
 	</div>
 

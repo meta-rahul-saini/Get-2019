@@ -11,19 +11,21 @@
 	<title>Home page</title>
 </head>
 <body>
-
-  <!-- 	 nav bar -->
+	
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<ul class="navbar-nav">
-			<li class="nav-item active"><a class="nav-link" href="/home">Home</a>
-			</li>
-			<li class="nav-item"><a class="nav-link" href="addStudent">add
-					Student</a></li>
-					
-			<li class="nav-item"><a class="nav-link" href="showAllStudent">show Student</a></li>
-		</ul>
+	<ul class="navbar-nav">
+		<li class="nav-item active"><a class="nav-link" href="/home">Home</a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="signUp">add
+				Student</a></li>
+
+		<li class="nav-item"><a class="nav-link" href="showStudent">show
+				Student</a></li>
+
+		<li class="nav-item"><a class="nav-link" href="searchStudent">Search
+				Student</a></li>
+	</ul>
 	</nav>
-<br><br>
 
 <div class="table-responsive">
     <table class="table table-bordered">
@@ -39,8 +41,8 @@
         </tr>
       </thead>
       <tbody>
-      <c:if test="${not empty listOfStudents}">
-    	 <c:forEach var="student" items="${listOfStudents}" varStatus="loopcounter">
+      <c:if test="${not empty studentDetails}">
+    	 <c:forEach var="student" items="${studentDetails}" varStatus="loopcounter">
     	
          <tr>
           <td> ${loopcounter.count }</td>

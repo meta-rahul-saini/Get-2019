@@ -14,22 +14,28 @@
 </head>
 <body>
 
-  <!-- 	 nav bar -->
+
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<ul class="navbar-nav">
-		   	<li class="nav-item active"><a class="nav-link" href="/home">Home</a>
-			</li>
-			<li class="nav-item"><a class="nav-link" href="addStudent">add
-					Student</a></li>
-					
-			<li class="nav-item"><a class="nav-link" href="showAllStudent">show Student</a></li>
-			
-			<li class="nav-item"><a class="nav-link" href="searchStudent">Search Student</a></li>
-		</ul>
+	<ul class="navbar-nav">
+		<li class="nav-item active"><a class="nav-link" href="/home">Home</a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="signUp">add
+				Student</a></li>
+
+		<li class="nav-item"><a class="nav-link" href="showStudent">show
+				Student</a></li>
+
+		<li class="nav-item"><a class="nav-link" href="searchStudent">Search
+				Student</a></li>
+	</ul>
 	</nav>
-<br><br>
+	
+	<div class="container">
+		<div>
+				<h1>${success }</h1>
+		</div>
+	</div>
 	<div class="container ">
-		<h2>Insert Data</h2>
 		<form:form modelAttribute="SearchCommand">
 			<form:errors path="${Email}" cssClass="error text-warning" />
 			<div class="form-group">
@@ -38,14 +44,9 @@
 				<form:errors cssClass="error text-warning" path="firstName"/> 
 			</div>
 			
-			<div class="form-group">
-				<form:label path="lastName">Last Name:</form:label> 
-				<form:input path="lastName" cssClass="form-control" id="lastName" placeholder="Enter Student Last Name" />
-				<form:errors cssClass="error text-warning" path="lastName"/>
-			</div>
-			
 			<button type="submit" class="btn btn-primary">Submit</button> 
-			<a href="/home" class="btn btn-primary btn-sm text-center">Return To Home Page</a>
+			
+			<button type="reset" class="btn btn-danger">Reset</button> 
 		</form:form>
 	</div>
  	<c:if test="${not empty studentData}">

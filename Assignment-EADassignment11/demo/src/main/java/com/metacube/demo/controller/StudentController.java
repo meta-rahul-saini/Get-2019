@@ -1,5 +1,6 @@
 package com.metacube.demo.controller;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +14,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.metacube.demo.dto.Student;
+import com.metacube.demo.dto.SearchStudentDto;
+import com.metacube.demo.dto.StudentDto;
 import com.metacube.demo.entity.StudentEntity;
 import com.metacube.demo.services.StudentService;
 import com.metacube.demo.util.DtoUtil;
 
-/**
- * Controller class to handle the request mapping
- * @author Rahul
- *
- */
+
 @Controller
 public class StudentController {
 	
 	@Autowired
-	private StudentService studentRepo;
+	private StudentService studentObj;
+	
+	
+	public void getBean(StudentService sobj) {
+		this.studentObj = sobj;
+	}
+	
 	
 	@Value("${home.message}")
 	private String message;
 
-	@GetMapping("/")
-	public String getHome1(Model model) {
-		model.addAttribute("message" ,message);
-		return "home";
-	}
-	
 	/**
 	 * request come from web server /Home then page redirect is home.jsp
 	 * @param model
@@ -54,9 +52,9 @@ public class StudentController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/showAllStudent")
+	@GetMapping("/showStudent")
 	public String displayStudent(Model model) {
-		model.addAttribute("listOfStudents", studentRepo.getAll());
+		model.addAttribute("studentDetails", studentObj.getAll());
 		return "showStudent";
 		
 	}
@@ -67,9 +65,10 @@ public class StudentController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/addStudent")
+	@GetMapping("/signUp")
 	public String doSignUp(Model model) {
-		model.addAttribute("student", new Student());
+		model.addAttribute("studentCommand", new StudentDto());
+		System.out.println("go to add student details");
 		return "addStudent";
 	}
 	
@@ -80,25 +79,44 @@ public class StudentController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/addStudent")
-	public String doSignupByPost(@ModelAttribute("student") @Validated Student student , BindingResult errorResult , Model model) {
+	@PostMapping("/signUp")
+	public String doSignupByPost(@ModelAttribute("studentCommand") @Validated StudentDto student , BindingResult errorResult , Model model) {
 		if(errorResult.hasErrors()) {
-//			ObjectError oe = new  ObjectError("email","Fill The Form");
-//			errorResult.addError(oe);
+			ObjectError oe = new  ObjectError("Email","Fill The Form");
+			errorResult.addError(oe);
 			return "addStudent";
 		} else {
-			List<StudentEntity> studentData = studentRepo.duplicateEmail(DtoUtil.map(student,StudentEntity.class));
-			if(studentData.size()>0) {
-				
-				model.addAttribute("success", "Student Already Exist");
+
+			try {
+			studentObj.insertData(DtoUtil.map(student,StudentEntity.class));
+			}
+			catch(Exception o) {
+				System.out.println("Student Email Exist");
+				model.addAttribute("success", "Student Email Exist");
 				return "addStudent";
-			} 
-			studentRepo.insertData(DtoUtil.map(student,StudentEntity.class));
-			model.addAttribute("student", student);
-			model.addAttribute("success", "Student added Successfully");
-			return "successfully";
+			}
+			model.addAttribute("success", "Student Added Successfully");
+			return "addStudent";
 		}
 	}
 
-
+	@GetMapping("/searchStudent") 
+	public String searchStudentByGet(Model model) {
+		model.addAttribute("SearchCommand", new SearchStudentDto());
+		return "Search";
+	}
+	
+	
+	@PostMapping("/searchStudent") 
+	public String searchStudentByPost(@ModelAttribute("SearchCommand") @Validated SearchStudentDto student , BindingResult errorResult , Model model) {
+		List<StudentEntity> studentData = studentObj.findByName(student.getFirstName());
+		if(studentData.size()>0) {
+			System.out.println(studentData.get(0).getEmail());
+			model.addAttribute("studentData", studentData);
+			return "Search";
+		}
+		model.addAttribute("success", "No Student Find");
+	
+		return "Search";
+	}
 }

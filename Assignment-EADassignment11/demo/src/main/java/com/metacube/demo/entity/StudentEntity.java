@@ -2,19 +2,15 @@ package com.metacube.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Student")
+@Table(name="student")
 public class StudentEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-
 	@Column(name="firstName")
 	String firstName;
 	@Column(name="lastName")

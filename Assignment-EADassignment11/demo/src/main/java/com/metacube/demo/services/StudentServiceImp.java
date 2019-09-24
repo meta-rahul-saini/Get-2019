@@ -7,31 +7,29 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.metacube.demo.dao.StudentDao;
 import com.metacube.demo.entity.StudentEntity;
+import com.metacube.demo.repository.StudentRepository;
 
 @Service
 public class StudentServiceImp implements StudentService{
+	
 	@Autowired
-	StudentDao studentdaoObj;
+	StudentRepository studentRepoObj;
+	
+	
 	@Override
 	public void insertData(StudentEntity sObj) {
-		studentdaoObj.add(sObj);
+		studentRepoObj.save(sObj);
 		
 	}
 	@Override
-	public List<StudentEntity> getAll() {
-		return studentdaoObj.getAll();
-	}
-	@Override
-	public List<StudentEntity> duplicateEmail(StudentEntity sObj) {
-		return studentdaoObj.duplicateEmail(sObj);
-	}
-	@Override
-	public List<StudentEntity> findByID(StudentEntity sObj) {
-		return studentdaoObj.findByID(sObj);
+	public Iterable<StudentEntity> getAll() {
+		return studentRepoObj.findAll();
 	}
 	
-
+	@Override
+	public List<StudentEntity> findByName(String name) {
+		return studentRepoObj.findByFirstNameContainingIgnoreCase(name);
+	}
 
 }

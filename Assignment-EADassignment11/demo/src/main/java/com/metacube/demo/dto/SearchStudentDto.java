@@ -11,15 +11,10 @@ public class SearchStudentDto {
 	@NotNull
 	String firstName;
 	
-	@Size(min = 3, max = 30)
-	@NotBlank(message = "{name}")
-	@NotNull
-	String lastName;
 	
 	public SearchStudentDto(String firstName,String lastName) {
 		super();
 		this.firstName = firstName;
-		this.lastName = lastName;
 	}
 
 	public SearchStudentDto() {
@@ -32,14 +27,5 @@ public class SearchStudentDto {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 
 }
