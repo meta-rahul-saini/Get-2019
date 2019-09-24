@@ -12,14 +12,18 @@
 </head>
 <body>
 	
-<div class="container text-center">
-  <div class="row">
-    <div class="col-sm-12">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<ul class="navbar-nav">
+		<li class="nav-item active"><a class="nav-link" href="home">Home</a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="AddUser">add
+				User</a></li>
 
-      <p class ="bg-light text-dark" style="text-decoration: none;"><a href="home">Home Page</a></p>
-    </div>
-  </div>
-</div>
+		<li class="nav-item"><a class="nav-link" href="showUser">show
+				User</a></li>
+	</ul>
+	</nav>
+	
 
 <div class="table-responsive">
     <table class="table table-bordered">

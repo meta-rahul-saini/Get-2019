@@ -14,36 +14,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Override
-	protected void configure(final AuthenticationManagerBuilder auth) throws Exception{
-		auth.jdbcAuthentication().dataSource( new UserConfig().getDataSource())
-		.passwordEncoder(passwordEncoder())
-		.usersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username = ?")
-		.authoritiesByUsernameQuery("SELECT username, role FROM (user AS U NATURAL JOIN user_role AS UR)"
-				+ " Inner JOIN role_list AS RL ON RL.ID=UR.roleId WHERE U.username = ?");
+	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+		auth.jdbcAuthentication().dataSource(new UserConfig().getDataSource()).passwordEncoder(passwordEncoder())
+				.usersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username = ?")
+				.authoritiesByUsernameQuery("SELECT username, role FROM (user AS U NATURAL JOIN user_role AS UR)"
+						+ " Inner JOIN role_list AS RL ON RL.ID=UR.roleId WHERE U.username = ?");
 	}
-	
+
 	@Override
-	protected void configure(final HttpSecurity http)throws Exception{
-		http
-		.authorizeRequests()
-		.antMatchers("/userHome").hasAuthority("user")
-		.antMatchers("/home").hasAuthority("admin")
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.defaultSuccessUrl("/home",true)
-		.failureUrl("/login?error=true")
-		.and()
-		.logout().logoutSuccessUrl("/login?logout")
-		.and()
-		.csrf().disable();
+	protected void configure(final HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/home").hasAnyAuthority("user", "admin").antMatchers("/showUser")
+				.hasAuthority("admin").anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
+				.defaultSuccessUrl("/home").failureUrl("/login?error=true").and().logout().permitAll();
+		http.csrf().disable();
 	}
-	
+
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}

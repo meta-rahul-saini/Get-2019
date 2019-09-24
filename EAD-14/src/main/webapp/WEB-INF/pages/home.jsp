@@ -12,35 +12,17 @@
 <body>
 	
 	
-<!-- <div class = "container" > -->
-<!-- 	<div class="jumbotron text-center bg-warning text-white"> -->
-<%-- 		<h1>${message }</h1> --%>
-<!--   		<p>In this Assignment we are static show the data add the data !</p>  -->
-<!--      </div> -->
-<!-- </div> -->
-  
-<div class="container ">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Operation 1</h3>
-      <p class ="bg-light text-dark" style="text-decoration: none;"><a href="AddUser">Add Student</a></p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Operation 2</h3>
-     
-      <p class = "bg-light text-dark" style="text-decoration: none;"><a href="showUser">Show Student</a></p>
-    </div>
-    
-      <div class="col-sm-4">
-      <h3>Operation 3</h3>
-     
-      <p class = "bg-light text-dark" style="text-decoration: none;"><a href="UserHome">User Home</a></p>
-    </div>
-  </div>
-</div>
-<!-- <form action="/logout"><input type="button" value="logout"  /></form> -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<ul class="navbar-nav">
+		<li class="nav-item active"><a class="nav-link" href="UserHome">Home</a>
+		</li>
+		<li class="nav-item"><a class="nav-link" href="AddUser">add
+				User</a></li>
 
-	
+		<li class="nav-item"><a class="nav-link" href="showUser">show
+				User</a></li>
+</ul>
+	</nav>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

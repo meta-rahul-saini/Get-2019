@@ -14,10 +14,22 @@
 </head>
 <body>
 
+	
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<ul class="navbar-nav">
+		<li class="nav-item active"><a class="nav-link" href="home">Home</a>
+		</li>
+
+		<li class="nav-item"><a class="nav-link" href="showUser">show
+				User</a></li>
+
+	</ul>
+	</nav>
+	
 	<div class="container">
 		<div >
 		<h4 style="color: red">${success }</h4>
-			<h1>Add Student Operation Page</h1>
+			<h1>Add User</h1>
 				
 		</div>
 	</div>
@@ -78,7 +90,9 @@
 			
 			
 			<button type="submit" class="btn btn-primary">Submit</button> 
-			<a href="/home" class="btn btn-primary btn-sm text-center">Return To Home Page</a>
+			<button type="reset" class="btn btn-danger">Reset</button> 
+	
+	
 		</form:form>
 	</div>
 
