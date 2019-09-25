@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div id="NavBar">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ul>
+                <li><a href="#employeeForm">Employee Form</a></li>
+                <li><a href="#vehicleForm">Vehicle Form</a></li>
+                <li><a href="#feedbackForm">Feedback Form</a></li>
+                <li><a href="#vehiclePlans">Plan Form</a></li>
+            </ul>
+        </div>
+
+        <div align="center" id="Heading">
+            <h1>Metacube Parking Portal</h1><br />
+            <img src="parking.jpg" width="100%">
+        </div>
+    </header>
+
+    <button id="employeeForm" type="button" class="collapsible">Employee Form</button>
+    <div  class="formStyle">
+        <h2>Employee Registration Form</h2>
+        <form action='' method='get' method="POST">
+            <div id="Form">
+                <div class='form-row'>
+                    <label for="FirstName">First Name : *</label>
+                    <input type="text" placeholder="First Name" id="FirstName" pattern="[a-zA-Z]+" required>
+                </div>
+
+                <div class='form-row'>
+                    <label for="LastName">Last Name : *</label>
+                    <input type="text" placeholder="Last Name" id="LastName" pattern="[a-zA-Z]+" required>
+                </div>
+                <div class='form-row'>
+                    <span id="radio">Select Gender :</span>
+                    <input type="radio" name="Gender" id="Male" value="Male"> Male
+                    <input type="radio" name="Gender" id="Female" value="Female">Female
+                </div>
+                <div class='form-row'>
+                    <label for="ContactNumber">Contact Number : *</label>
+                    <input type="text" name="number" id="ContactNumber" placeholder="Contact Number" pattern="[0-9]+"
+                        minlength="8" maxlength="10" required>
+                </div>
+                <div class='form-row'>
+                    <label for="EmailId">Email id : *</label>
+                    <input type="email" name="email" id="EmailId" placeholder="Email Id" required>
+                </div>
+
+                <div class='form-row'>
+
+                    <label for="Password">Password : *</label>
+                    <input type="password" name="password" id="Password" placeholder="Password" required>
+                </div>
+
+                <div class='form-row'>
+
+                    <label for="ConfirmPassword">Confirm Password : *</label>
+                    <input type="password" name="password" id="ConfirmPassword" placeholder="Confirm Password" required>
+                </div>
+                <input type="submit" value="Submit Employee Details">
+            </div>
+        </form>
+    </div>
+
+    <button id="vehicleForm" type="button" class="collapsible">Vehicle Form</button>
+    <div  class="formStyle" align="left">
+        <h2>Vehicle Details Form</h2>
+        <form action='' method="POST">
+            <div class='form-row'>
+                <label for="VehicleName">Vehicle Name : *</label><br>
+                <input type="text" placeholder="Vehicle Name" id="VehicleName" required>
+            </div>
+            <div class='form-row'>
+                <span id="radio">Vehicle Type * </span>
+                <select id="VehicleType">
+                    <option value="Bicycle">Bicycle</option>
+                    <option value="Two Wheeler">Two Wheeler</option>
+                    <option value="Four Wheeler">Four Wheeler</option>
+                </select>
+            </div>
+            <div class='form-row'>
+                <label for="VehicleNumber">Vehicle Number : *</label><br>
+                <input type="text" placeholder="Vehicle Number" id="VehicleNumber" required><br /><br />
+            </div>
+            <div class='form-row'>
+                <label for="VehicleDetails">Vehicle Details : </label><br /><br />
+                <textarea rows="10" cols="50" id="VehicleDetails" placeholder="Input Vehicle Details Here"
+                    required></textarea><br /><br />
+            </div>
+            <input type="submit" value="Submit Vehicle Details"></br></br></br></br>
+        </form>
+    </div>
+
+    <div class="feedbackForm" id="feedbackForm">
+        <h2>Feedback Form</h2>
+        <form method="post" method="POST">
+            <div id="Form">
+                <div id="form">
+                    <div class='form-row'>
+                        <label for="EmployeeId">Employee Id : *</label>
+                        <input type="text" placeholder="Vehicle Name" id="VehicleName" required>
+                    </div>
+                    <div class='form-row'>
+                        <label for="Subject">Subject : *</label>
+                        <input type="text" placeholder="Subject" id="Subject" required><br /><br />
+                    </div>
+                    <div class='form-row'>
+                        <label for="Message">Message : *</label><br /><br />
+                        <textarea rows="10" cols="50" id="Message" placeholder="Input Message Here"
+                            required></textarea><br /><br />
+                    </div>
+                    <input type="submit" value="Submit Feedback" /></br></br></br></br>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="vehiclePlansParent" id="vehiclePlans">
+        <h2>Vehicle Plan Form</h2>
+        <div id="Form" align="center">
+            <br><br>
+            <b>Select Any One Plan</b><br /><br />
+            
+            <div class="vehiclePlans">
+                <b>CYCLE</b><br />
+                <div class="circle">
+                    <span><b><span>&#36;</span>100 </b></span>/Monthly
+                </div>
+
+                <br>
+                <span> <b></b><span>&#36;</span>5</b>/daily</span>
+                <br>
+
+                <span> <b></b><span>&#36;</span>100</b>/monthly</span>
+                <br>
+
+                <span> <b></b><span>&#36;</span>1000</b>/yearly</span>
+                <br>
+                <input type="submit" style="width: 60%;" value="PURCHASE NOW"></input>
+            </div>
+
+            <div class="vehiclePlans">
+                <b>MOTORCYCLE</b><br />
+
+                <div class="circle">
+                    <span><b><span>&#36;</span>200 </b></span>/Monthly
+                </div>
+
+                <br>
+                <span> <b></b><span>&#36;</span>10</b>/daily</span>
+                <br>
+
+                <span> <b></b><span>&#36;</span>200</b>/monthly</span>
+                <br>
+
+                <span> <b></b><span>&#36;</span>2000</b>/yearly</span>
+                <br>
+                <input type="submit" style="width: 60%;" value="PURCHASE NOW"></input>
+            </div>
+
+
+            <div class="vehiclePlans">
+                <b>FOURWHEELER</b><br />
+                <div class="circle">
+                    <span><b><span>&#36;</span>400 </b></span>/Monthly
+                </div>
+
+                <br>
+                <span> <b></b><span>&#36;</span>20</b>/daily</span>
+                <br>
+
+                <span> <b></b><span>&#36;</span>400</b>/monthly</span>
+                <br>
+
+                <span> <b></b><span>&#36;</span>4000</b>/yearly</span>
+                <br>
+                <input type="submit" style="width: 60%;" value="PURCHASE NOW"></input>
+            </div>
+        </div>
+    </div>
+
+    <span class="clearFloat"></span>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
