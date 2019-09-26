@@ -1,0 +1,221 @@
+
+body {
+    font-family: sans-serif;
+    font-weight: 700;
+    background-image: url("images/bodybg.png");
+}
+
+ /* header section */
+.container {
+    display: flex;
+    padding: 0px 200px;
+}
+nav a {
+    text-decoration: none;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+.navBarButtons ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navBarButtons ul li {
+    margin-left: 10px;
+}
+
+header a {
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.navBarLogo {
+    color: white;
+}
+
+.navBarSocialLinks ul li {
+    margin-left: 30px;
+}
+
+.navBarSocialLinks ul {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navBarLogo {}
+
+.container div {
+    flex: 1;
+}
+
+@media all and (max-width: 900px) {
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .container>div {
+        flex-basis: 100%;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .container>div {
+        flex-basis: 100%;
+    }
+
+    .navBarButtons {
+        order: 2;
+    }
+
+    .navBarSocialLinks {
+        justify-content: center;
+    }
+
+    .navBarLogo {
+
+        justify-content: center;
+    }
+}
+
+header {
+    background-image: url("images/homebg.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.header-main-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.header-main-text {
+    margin-left: 200px;
+    font-size: 30px;
+    color: white;
+    width: 400px;
+}
+
+.header-front-image {
+    margin-left: 50px;
+    margin-right: 200px;
+}
+
+.button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 10px;
+    border-radius: 4px;
+    width: 80px;
+    padding: 15px;
+    text-align: center;
+    margin: 4px;
+}
+
+.button-red {
+    background-color: red;
+}
+
+.button-blue {
+    background-color: blue;
+}
+
+#features {
+    display: flex;
+}
+
+#features h1 {
+    display: block;
+    width: 100%;
+}
+
+ /* feature section  */
+.features-text h1 {
+    text-align: center;
+    color: DodgerBlue;
+}
+
+.features-text p {
+    text-align: center;
+    color: grey;
+    font-weight: 500;
+}
+
+.feature-usablity-image {
+    float: left;
+    height: 150px;
+    padding: 20px;
+}
+
+.feature-usablity-text {
+    vertical-align: top;
+    margin-top: 0px;
+    padding: 10px;
+}
+
+.weather-temp-image {
+    text-align: center;
+}
+
+#features {
+    margin: 60 200px;
+
+}
+    /* screenshots section  */
+#screenshots {
+    margin: 0 200px;
+}
+
+.screenshots-container-row .review-containe-row {
+    display: table-row;
+}
+
+.screenshots-container-cell,
+.review-containe-cell {
+    display: table-cell;
+    width: 30%;
+    vertical-align: top;
+    padding: 5px 20px;
+    padding: 20px;
+}
+
+#reviews {
+    margin: 0 200px;
+}
+
+    /* bottom section  */
+#bottom{
+    background-image: url("images/homebg.png");
+    padding-top:70px; 
+}
+
+.bottom-content{
+    margin-left: 200px;
+    color: white;
+    width: 25%;
+    margin-right: 180px;
+    float: left;
+}
+
+.promotion-image{
+    margin-right: 80px;
+}
+    /* footer section */
+#footer{
+    background-color: rgb(67, 67, 122);
+    color: white;
+}
+
+#footer a{
+    color: white;
+    font-weight: 300;
+}
+
+hr{
+    border: 0.5px solid gray;
+}
