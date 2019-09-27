@@ -219,3 +219,38 @@ header {
 hr{
     border: 0.5px solid gray;
 }
+
+.rotate{
+    font-weight: 100;
+    color: gray;
+    font-family: sans-serif;
+    font-size: 210px;
+    position: absolute; 
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.rotate-cloudy{
+    transform: rotate(90deg);
+    margin-left: -20px;
+    margin-top: -400px;
+}
+
+.rotate-rainy{
+    transform: rotate(90deg);
+    margin-left: 40px;
+    margin-top: -450px;
+}
+
+.rotate-sunny{
+    transform: rotate(90deg);
+    margin-left: 10px;
+    margin-top: -450px;
+}
+
+.screenshots-text-sub{
+    color: gray;
+    font-weight: 300;
+    opacity: 0.7;
+    width: 350px;
+}
