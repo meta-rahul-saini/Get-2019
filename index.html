@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+
+    <div class="form-style-5" id="employee-name" style="display: block;">
+        <fieldset>
+            <legend><span class="number">0% </span> <span class="formType"> Employee Form </span> </legend>
+            <p id="employee-name-label"> Enter your name</p>
+
+            <div class="content">
+                <input type="text" name="name" id="name" placeholder="Your Name...*">
+            </div>
+        </fieldset>
+        <button onclick="validateName()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="employee-email" style="display: none;">
+        <fieldset>
+            <legend><span class="number">16%</span> <span class="formType"> Employee Form </span> </legend>
+            <p id="employee-email-label"></p>
+            <div class="content">
+                <input type="text" name="email" id="email" placeholder="Your Email...*">
+            </div>
+        </fieldset>
+        <button onclick="validateEmail()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="employee-contact" style="display: none;">
+        <fieldset>
+            <legend><span class="number">33%</span> <span class="formType"> Employee Form </span> </legend>
+            <p id="employee-contact-label"></p>
+            <div class="content">
+                <input type="text" name="contact" id="contact" placeholder="Your Contact...*">
+            </div>
+        </fieldset>
+        <button onclick="validateContact()"> Apply</button>
+    </div>
+
+
+    <div class="form-style-5" id="employee-password" style="display: none">
+        <fieldset>
+            <legend><span class="number">50%</span> <span class="formType"> Employee Form </span> </legend>
+            <p id="employee-password-label"></p>
+            <div class="content">
+                <input type="password" name="password" id="password" placeholder="Your Password...*">
+            </div>
+        </fieldset>
+        <button onclick="validatePassword()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="employee-confirm-password" style="display: none">
+        <fieldset>
+            <legend><span class="number">66%</span> <span class="formType"> Employee Form </span> </legend>
+            <p id="employee-confirm-password-label"></p>
+            <div class="content">
+                <input type="password" name="confirm-password" id="confirm-password"
+                    placeholder="Your confirm Password...*">
+            </div>
+        </fieldset>
+        <button onclick="validateConfirmPassword()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="employee-gender" style="display: none">
+        <fieldset>
+            <legend><span class="number">83%</span> <span class="formType"> Employee Form </span> </legend>
+            <p id="employee-gender-label"></p>
+            <div class="content" id="content">
+                <input type="radio" name="gender" id="male" value="male"> male
+                <input type="radio" name="gender" id="female" value="female"> female
+            </div>
+        </fieldset>
+        <button onclick="generateVehicleForm()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="vehicle-name-form" style="display: none">
+        <fieldset>
+
+            <legend><span class="number">0% </span> <span class="formType"> Vehicle Form </span> </legend>
+            <p id="vehicle-name-label"></p>
+            <div class="content">
+                <input type="text" name="vehicle-name" id="vehicle-name" placeholder="vehicle name..." />
+            </div>
+        </fieldset>
+        <button class="vehicleButton" onclick="submitVehicleName()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="vehicle-type-form" style="display: none">
+        <fieldset>
+            <legend><span class="number">25% </span> <span class="formType"> Vehicle Form </span> </legend>
+            <p id="vehicle-type-label"></p>
+            <div class="content">
+                <select id="vehicle-type" name="vehicle-type">
+                    <option value="Cycle">Cycle</option>
+                    <option value="two-wheeler">Two Wheeler</option>
+                    <option value="four-wheeler">Four Wheeler</option>
+                </select>
+            </div>
+        </fieldset>
+        <button class="vehicleButton" onclick="submitVehicleType()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="vehicle-number-form" style="display: none">
+        <fieldset>
+            <legend><span class="number">50% </span> <span class="formType"> Vehicle Form </span> </legend>
+            <p id="vehicle-number-label"></p>
+            <div class="content">
+                <input type="text" name="vehicle-number" id="vehicle-number" placeholder="vehicle number..." />
+            </div>
+        </fieldset>
+        <button class="vehicleButton" onclick="submitVehicleNumber()"> Submit</button>
+    </div>
+
+    <div class="form-style-5" id="vehicle-identification-form" style="display: none">
+        <fieldset>
+            <legend><span class="number">75% </span> <span class="formType"> Vehicle Form </span> </legend>
+            <p id="vehicle-name-label"></p>
+            <div class="content">
+                <textarea name="vehicle-identification" id="vehicle-identification"
+                    placeholder="vehicle-identification"></textarea>
+            </div>
+        </fieldset>
+        <button class="vehicleButton" onclick="submitVehicleIdentification()"> Apply</button>
+    </div>
+
+    <div class="form-style-5" id="get-pass-form" style="display:none">
+
+        <p id="select-currency-label"></p>
+
+        <select id="currencyName" name="currencyName" onchange="rateCard()">
+
+            <option id="INR" value="INR">Indian Rupees</option>
+
+            <option id="USD" value="USD">US Dollars</option>
+
+            <option id="YEN" value="YEN">Japanese Yen</option>
+        </select><br><br>
+
+        <div id="rateTable" style="display:block">
+            <table id="passTable" > 
+                <tr id="vehicleType" > </tr>
+                <tr>
+                    <th> Duration</th>
+                    <th id="NameOfCurrency"></th>
+                </tr>
+                <tr>
+                    <th>Daily </th>
+                    <th id="daily">0</th>
+                    <th><input type="radio" id="dailyRadio" name='plan' value='daily'></input></th>
+                </tr>
+                <tr>
+                    <th>Monthly</th>
+                    <th id="monthly">0</th>
+                    <th><input type='radio' id="monthlyRadio" name='plan' value='monthly'></input></th>
+                </tr>
+                <tr>
+                    <th>Yearly</th>
+                    <th id="yearly">0</th>
+                    <th><input type='radio' id="yearlyRadio" name='plan' value='yearly'></input></th>
+                </tr>
+            </table>
+        </div>
+        <button class="vehicleButton" onclick="getPass()"> getPass</button>
+        </form>
+    </div>
+
+
+    <div class="form-style-5" id="pass-form" style="display: none">
+
+        <h1 id="showPrice"> Give </h1>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
