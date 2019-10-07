@@ -127,7 +127,21 @@ button:hover
     border: 1px solid rgba(255, 166, 0, 0.301);
 }
 
-
+#empId{
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border:2px solid #8a97a0;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.911);
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+}
 .vehiclePlansParent {
     display: flex;
     flex-direction: row;

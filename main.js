@@ -95,6 +95,8 @@ function generateVehicleForm() {
         document.body.style.backgroundColor = "rgba(172, 255, 47, 0.356)";
         document.getElementById("vehicle-name").style.backgroundColor = "rgba(172, 255, 47, 0.226)";
         document.getElementById("vehicle-name-label").innerText = "Enter Vehicle Name";
+        document.getElementById("empId").style.display = "block";
+        
     }
     else {
         document.getElementById("employee-gender-label").innerText = "Please Select Gender";
@@ -136,6 +138,7 @@ function submitVehicleIdentification() {
     document.getElementById("vehicle-identification-form").style.display = "none";
     document.getElementById("get-pass-form").style.display = "block";
     document.getElementById("vehicle-type-label").innerText = "select pass...";
+    document.getElementById("select-currency-label").innerText = "Select your currency...";
 }
 
 
@@ -145,9 +148,6 @@ function rateCard() {
     var type1 = vehicleType
     exchangeFromRupee = 1;
     currency = document.getElementById("currencyName").value;
-
-    document.getElementById("select-currency-label").innerText = "Select your currency...";
-
     console.log(type1);
     console.log(currency);
 
