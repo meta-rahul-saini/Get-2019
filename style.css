@@ -1,0 +1,184 @@
+body{
+    background-color: rgba(255, 166, 0, 0.623);
+     
+    /* background-color: rgba(172, 255, 47, 0.356); */
+     height: 100%;
+    width: 100%;
+    display: table;
+}
+
+.form-style-5{
+    height: 100%;
+    max-width: 500px;
+    margin: auto;
+	padding: 20px;
+    border-radius: 8px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.get-pass-form{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-style-5 fieldset{
+	border: none;
+}
+.form-style-5 legend {
+	font-size: 1.4em;
+	margin-bottom: 10px;
+}
+.form-style-5 label {
+	display: block;
+	margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="password"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	border: none;
+	font-size: 15px;
+	margin: 0;
+	outline: 0;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box; 
+    background-color: rgba(255, 166, 0, 0.301);
+    /* background-color: rgba(172, 255, 47, 0.226); */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.24);
+	color:#8a97a0;
+	margin-bottom: 30px;
+}
+
+#vehicle-type{
+    
+    background-color: rgba(172, 255, 47, 0.261);
+}
+
+
+.vehicleButton:hover, #currencyName,  #vehicle-number, #vehicle-identification  {
+    background-color: rgba(172, 255, 47, 0.261);
+    border-color: rgba(172, 255, 47, 0.261);
+}
+
+#showPrice{
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+}
+
+.form-style-5 .number {
+	background: rgba(0, 0, 0, 0.411);
+	color: #fff;
+	height: 30px;
+	width: 60px;
+	display: inline-block;
+	font-size: 0.8em;
+	margin-right: 4px;
+	line-height: 30px;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+	border-radius: 15px 15px 15px 0px;
+}
+
+
+
+
+
+button
+{
+	position: relative;
+	display: block;
+	padding: 19px 39px 18px 39px;
+	color:rgba(245, 245, 245, 0.63);
+	margin: 0 auto;
+    /* background: rgba(0, 0, 0, 0.473); */
+    background-color: rgba(0, 0, 0, 0.308);
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.212);
+	margin-bottom: 10px;
+}
+
+button:hover
+{
+    /* background: rgba(255, 166, 0, 0.301); */
+    background: rgba(255, 166, 0, 0.301);
+    color: rgba(255, 255, 255, 0.452);
+    border: 1px solid rgba(255, 166, 0, 0.301);
+}
+
+
+.vehiclePlansParent {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 18px;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 16px;
+    border: 1px solid black;
+    margin-top: 5px;
+}
+.vehiclePlans {
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+    float: left;
+    margin: 10px;
+}
+
+.circle {
+    height: 65px;
+    padding: 5px;
+    width: 65px;
+    margin: 10px;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 1px solid black;
+    display: inline-block;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 900;
+    display: inline-flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.purchaseButton
+{
+    width: 35%;
+    padding: 12px 20px;
+    margin: 0 auto;
+    display: inline;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    box-sizing: border-box;
+    background-color: #007bff !important;
+    color: #fff;
+}
+
+.formType {
+    font-weight: bold;   
+}
