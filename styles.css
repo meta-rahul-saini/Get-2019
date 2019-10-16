@@ -6,6 +6,8 @@ body {
     background: #fafafa;
 }
 
+
+
 a, a:hover, a:focus {
     color: inherit;
     text-decoration: none;
@@ -231,6 +233,10 @@ a, a:hover, a:focus {
     color: orange;
   }
 
+
+  body {
+    --table-width: 100%; /* Or any value, this will change dinamically */
+  }
 
   .newUserListIcons{
     width: 40px;

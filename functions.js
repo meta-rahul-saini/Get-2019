@@ -32,6 +32,25 @@ function myFunction(x) {
   x.addListener(myFunction) // Attach listener function on state changes
 
 
+  var y = window.matchMedia("(min-width: 767px)")
+  myFunction1(y) // Call listener function at run time
+  y.addListener(myFunction1) // Attach listener function on state changes
+
+
+  function myFunction1(x) {
+    if (x.matches) { // If media query matches
+        document.getElementById("openSidebarButton").style.display ="none";
+        document.getElementById("closeSidebarButton").style.display = "none";
+        document.getElementById("sidebar").style.display = "block";
+      
+    } else {
+        
+
+        document.getElementById("openSidebarButton").style.display = "block";
+      document.getElementById("closeSidebarButton").style.display = "block";
+      document.getElementById("sidebar").style.display = "none";
+    }
+  }
 
  
 // 
