@@ -10,7 +10,7 @@ import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { EditComponent } from './edit/edit.component';
-
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,7 @@ import { EditComponent } from './edit/edit.component';
     EditComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule, DragDropModule,
     FormsModule, AppRoutingModule,
   ],
   providers: [],

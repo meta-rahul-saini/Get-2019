@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'edit',component: EditComponent},
   { path: 'home', component: HomeComponent },
-  { path: 'newTaskForm', component: NewTaskFormComponent },
+  { path: 'new-task-form', component: NewTaskFormComponent }
 ];
 
 

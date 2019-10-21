@@ -25,6 +25,7 @@ export class EditComponent implements OnInit {
     console.log("$$$$$$$$$$", taskForm.value);
     let task: task  = taskForm.value as task;
     task.creationDate = this.task.creationDate;
+    
     if(task.status=="completed")
     {
       task.completionDate = new Date();

@@ -44,6 +44,7 @@ export class NewTaskFormComponent implements OnInit {
   onSubmit(taskForm: NgForm) {
     let startDate: Date = new Date();
 
+    console.log("sadfsdaklfj;lsdajfljs");
     if(taskForm.value.status=="")
     {
       taskForm.value.status="new";

@@ -1,6 +1,11 @@
-<div class="container my-0 mx-1" style="background-color: #b2ebf2;border-bottom: 1px solid rgba(160, 154, 154, 0.192) ">
+<div class="container my-0 mx-1 my-4" style="background-color: #b2ebf2;border-bottom: 1px solid rgba(160, 154, 154, 0.192); box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.05),
+0 3px 14px 2px rgba(0, 0, 0, 0.05); ">
     <div class="card" style="background-color: #b2ebf221; border-width: 0px;">
         <div class="card-body">
+            <span *ngIf="task.priority=='low'" class="badge badge-pill badge-primary">{{task.priority}}</span>
+            <span *ngIf="task.priority=='medium'" class="badge badge-pill badge-warning">{{task.priority}}</span>
+            <span *ngIf="task.priority=='heigh'" class="badge badge-pill badge-danger">{{task.priority}}</span>
+
             <p class="card-title"><i><b>TITLE:</b></i> {{task.title}}</p>
             <p class="card-text">
                 <i><b>DESCRIPTION:</b></i> {{task.description}}<br>

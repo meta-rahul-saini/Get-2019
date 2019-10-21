@@ -18,7 +18,7 @@ export class CompletedTaskComponent implements OnInit {
   {
     localStorage.removeItem((task.creationDate + ""));
     location.reload(true);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   edit(task: task)

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { task } from '../task.model';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home',
@@ -52,4 +53,9 @@ export class HomeComponent implements OnInit {
 
     return string;
   }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.taskList, event.previousIndex, event.currentIndex);
+  }
+  
 }
