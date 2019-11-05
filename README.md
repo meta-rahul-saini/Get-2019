@@ -1,1 +1,2 @@
-# Get-2019
+# GET2019
+Assignments of GET 2019
