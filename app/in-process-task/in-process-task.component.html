@@ -1,0 +1,28 @@
+<div class="container mx-1 my-4 box" style="background-color: #ffcdd2;border-bottom: 1px solid rgba(160, 154, 154, 0.192); box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.05),
+0 3px 14px 2px rgba(0, 0, 0, 0.05);">
+    <div class="card" style="background-color: #ffcdd22a;border: 0px solid black;">
+        <div class="card-body">
+                <span *ngIf="task.priority=='low'" class="badge badge-pill badge-primary">{{task.priority}}</span>
+                <span *ngIf="task.priority=='medium'" class="badge badge-pill badge-warning">{{task.priority}}</span>
+                <span *ngIf="task.priority=='heigh'" class="badge badge-pill badge-danger">{{task.priority}}</span>
+    
+            <p class="card-title"><i><b>TITLE:</b></i> {{task.title}}</p>
+            <p class="card-text">
+                
+                <i><b>DESCRIPTION:</b></i> {{task.description}}<br>
+                <i><b>Cration Date:</b></i> {{task.creationDate}}<br>
+            </p>
+            <div class="row justify-content-between">
+                <button type="button" class="mx-2 my-2"
+                    style="background-color:rgba(160, 154, 154, 0); border-width: 0;" (click)="edit(task)">
+                    <h1><i class="fa fa-pencil-square-o" aria-hidden="true"></i></h1>,.
+                </button>
+                <button type="button" class="mx-2 my-2"
+                    style="background-color:rgba(160, 154, 154, 0); border-width: 0;" (click)="delete(task)">
+                    <h1><i class="fa fa-trash"></i></h1>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

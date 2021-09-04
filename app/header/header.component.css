@@ -1,0 +1,40 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.219);
+    width: 90%;
+    padding: 20px 0;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: dodgerblue;
+    font-family: verdana;
+    margin-left: 50px;
+}
+
+
+.newTaskButton {
+    width: 130px;
+    height: 50px;
+    font-size: 18px;
+    /* font-weight :500;
+    font-style : italic; */
+    border: 1px solid dodgerblue;
+    color: white;
+    background-color: dodgerblue;
+    margin-right: 50px;
+    
+}
+
+.newTaskButton:hover{
+background-color: rgb(165, 229, 245); 
+border-color: rgb(165, 229, 245);; 
+}
+
+a:hover{
+    color:rgb(165, 229, 245); 
+    text-decoration:none; 
+    cursor:pointer;  
+}
